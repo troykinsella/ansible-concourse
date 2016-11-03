@@ -1,5 +1,7 @@
 # ansible-concourse
 
+[![Build Status][travis-image]][travis-url]
+
 An ansible role to manage Concourse CI.
 
 ## Role Variables
@@ -71,3 +73,6 @@ License
 -------
 
 MIT
+
+[travis-image]: https://travis-ci.org/troykinsella/ansible-concourse.svg?branch=master
+[travis-url]: https://travis-ci.org/troykinsella/ansible-concourse
