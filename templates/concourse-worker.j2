@@ -5,4 +5,5 @@ exec {{ concourse_install_dir }}/concourse worker \
   --tsa-public-key {{ concourse_tsa_public_key_path }} \
   --tsa-worker-private-key {{ concourse_tsa_worker_key_path }} \
   --work-dir {{ concourse_work_dir }} \
+  {% if concourse_worker_tag is defined %}--tag {{ concourse_worker_tag }}{% endif %} \
   {{ concourse_worker_options }}

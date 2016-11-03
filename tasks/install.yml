@@ -23,7 +23,6 @@
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
   become: yes
-  become_user: root
 
 - include: stop.yml
   when: needs_install
@@ -36,6 +35,7 @@
     group: "{{ concourse_group }}"
     mode: 0755
     force: yes
+  become: yes
   when: needs_install
   register: binary_download
   notify:

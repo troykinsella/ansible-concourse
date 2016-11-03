@@ -2,16 +2,14 @@
   service:
     name: concourse-web
     state: stopped
-    enabled: yes
   become: yes
-  become_user: root
+  ignore_errors: yes
   when: concourse_web
 
 - name: stop worker | concourse
   service:
     name: concourse-worker
     state: stopped
-    enabled: yes
   become: yes
-  become_user: root
+  ignore_errors: yes
   when: concourse_worker

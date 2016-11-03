@@ -4,7 +4,6 @@
     state: started
     enabled: yes
   become: yes
-  become_user: root
   when: concourse_web
 
 - name: start worker | concourse
@@ -13,5 +12,4 @@
     state: started
     enabled: yes
   become: yes
-  become_user: root
   when: concourse_worker

@@ -39,6 +39,7 @@ See `defaults/main.yml` for default values.
 * concourse_tsa_host: Required. The value of the `--tsa-host` option.
 * concourse_tsa_public_key: Required. The tsa public key.
 * concourse_tsa_worker_key: Required. The tas worker private key.
+* concourse_worker_tag: Optional. The value of the `--tag` option.
 * concourse_worker_options: Optional. Other non-managed options to pass to `concourse`.
 
 ## Example Playbook

@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - role: ../
+      concourse_web: yes
+      concourse_session_signing_key: "foo"
+      concourse_host_key: "bar"
+      concourse_authorized_worker_keys: "baz"
+    - role: ../
+      concourse_worker: yes
+      concourse_tsa_host: "host"
+      concourse_tsa_public_key: "foo"
+      concourse_tsa_worker_key: "bar"
