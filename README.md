@@ -59,7 +59,12 @@ See `defaults/main.yml` for default values.
       roles:
       - role: troykinsella.concourse
         concourse_worker: yes
+        concourse_tsa_host: my-atc
+        concourse_tsa_public_key: "{{ host_pub_key }}"
         concourse_tsa_worker_key: "{{ worker1_key }}"
+        concourse_worker_options: |
+          --garden-network-pool 10.254.0.0/16 \
+          --garden-max-containers 1024
 
 License
 -------
