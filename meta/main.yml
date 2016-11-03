@@ -8,9 +8,6 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-    - trusty
-    - utopic
-    - vivid
     - wily
     - xenial
   galaxy_tags:
