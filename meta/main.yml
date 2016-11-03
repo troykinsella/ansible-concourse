@@ -1,0 +1,19 @@
+---
+dependencies: []
+galaxy_info:
+  author: Troy Kinsella
+  description: Concourse CI. CI that scales with your project.
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - utopic
+    - vivid
+    - wily
+    - xenial
+  galaxy_tags:
+    - concourse
+    - ci
+  github_branch: master

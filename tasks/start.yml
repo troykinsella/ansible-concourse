@@ -1,0 +1,17 @@
+- name: start web | concourse
+  service:
+    name: concourse-web
+    state: started
+    enabled: yes
+  become: yes
+  become_user: root
+  when: concourse_web
+
+- name: start worker | concourse
+  service:
+    name: concourse-worker
+    state: started
+    enabled: yes
+  become: yes
+  become_user: root
+  when: concourse_worker

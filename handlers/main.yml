@@ -1,0 +1,18 @@
+---
+- name: restart concourse web
+  service:
+    name: concourse-web
+    state: restarted
+    enabled: yes
+  become: yes
+  become_user: root
+  when: concourse_web
+
+- name: restart concourse worker
+  service:
+    name: concourse-worker
+    state: restarted
+    enabled: yes
+  become: yes
+  become_user: root
+  when: concourse_worker

@@ -1,0 +1,30 @@
+---
+- name: host key | concourse
+  copy:
+    content: "{{ concourse_host_key }}"
+    dest: "{{ concourse_host_key_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: 0400
+  notify:
+  - restart concourse web
+
+- name: session signing key | concourse
+  copy:
+    content: "{{ concourse_session_signing_key }}"
+    dest: "{{ concourse_session_signing_key_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: 0400
+  notify:
+  - restart concourse web
+
+- name: authorized worker keys | concourse
+  template:
+    src: authorized_worker_keys.j2
+    dest: "{{ concourse_authorized_worker_keys_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: 0400
+  notify:
+  - restart concourse web

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+exec {{ concourse_install_dir }}/concourse web \
+  --session-signing-key {{ concourse_session_signing_key_path }} \
+  --tsa-host-key {{ concourse_host_key_path }} \
+  --tsa-authorized-keys {{ concourse_authorized_worker_keys_path }} \
+  --cli-artifacts-dir {{ concourse_cli_artifacts_dir }} \
+  {{ concourse_web_options }}

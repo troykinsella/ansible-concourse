@@ -1,0 +1,30 @@
+---
+- name: create work directory | concourse
+  file:
+    path: "{{ concourse_work_dir }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  become: yes
+  become_user: root
+
+- name: create worker launch script | concourse
+  template:
+    src: concourse-worker.j2
+    dest: "{{ concourse_worker_launcher_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: 0700
+  become: yes
+  become_user: root
+
+- name: create worker service | concourse
+  template:
+    src: concourse-worker.service.j2
+    dest: /etc/systemd/system/concourse-worker.service
+    owner: root
+  become: yes
+  become_user: root
+  notify:
+  - restart concourse worker

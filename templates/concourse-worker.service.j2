@@ -1,0 +1,16 @@
+[Unit]
+Description=concourse-worker
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+TasksMax=infinity
+LimitNOFILE=infinity
+LimitMEMLOCK=infinity
+Restart=on-failure
+ExecStart={{ concourse_worker_launcher_path }}
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
