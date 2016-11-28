@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# {{ ansible_managed }}
+
 exec {{ concourse_install_dir }}/concourse worker \
   --tsa-host {{ concourse_tsa_host }} \
   --tsa-public-key {{ concourse_tsa_public_key_path }} \

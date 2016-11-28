@@ -17,6 +17,7 @@ See `defaults/main.yml` for default values.
 * concourse_binary_arch: Optional. The system architecture for which to fetch the Concourse binary.
 * concourse_user: Optional. The user that will own the Concourse install directory and the running process.
 * concourse_group: Optional. The group that will own the Concourse install directory and the running process.
+* concourse_force_restart: Optional. Triggers a restart of the web and/or worker services regardless as to whether or not configuration has changed.
 
 ### Web Variables
 

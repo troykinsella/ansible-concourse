@@ -6,6 +6,7 @@ concourse_binary_os: linux
 concourse_binary_arch: amd64
 concourse_user: concourse
 concourse_group: "{{ concourse_user }}"
+concourse_force_restart: no
 
 # Web variables
 

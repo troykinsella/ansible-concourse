@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# {{ ansible_managed }}
+
 exec {{ concourse_install_dir }}/concourse web \
   --session-signing-key {{ concourse_session_signing_key_path }} \
   --tsa-host-key {{ concourse_host_key_path }} \

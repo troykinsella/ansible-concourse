@@ -2,3 +2,9 @@
 - include: install.yml
 - include: configure.yml
 - include: start.yml
+
+- shell: /bin/true
+  when: concourse_force_restart
+  notify:
+  - restart concourse web
+  - restart concourse worker
