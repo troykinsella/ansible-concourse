@@ -1,0 +1,15 @@
+---
+- name: concourse group
+  become: yes
+  group:
+    name: "{{ concourse_group }}"
+    gid: "{{ concourse_gid }}"
+
+- name: concourse user
+  become: yes
+  user:
+    name: "{{ concourse_user }}"
+    comment: Concourse CI
+    uid: "{{ concourse_uid }}"
+    group: "{{ concourse_group }}"
+
