@@ -1,4 +1,18 @@
 ---
+- name: stop concourse web
+  service:
+    name: concourse-web
+    state: stopped
+  become: yes
+  when: concourse_web
+
+- name: stop concourse worker
+  service:
+    name: concourse-worker
+    state: stopped
+  become: yes
+  when: concourse_worker
+
 - name: restart concourse web
   service:
     name: concourse-web
