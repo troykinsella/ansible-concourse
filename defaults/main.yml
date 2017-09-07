@@ -4,6 +4,7 @@ concourse_install_dir: /opt/concourse
 concourse_binary_path: "{{ concourse_install_dir }}/concourse"
 concourse_binary_os: linux
 concourse_binary_arch: amd64
+concourse_binary_fetch_timeout: 30
 concourse_user: concourse
 concourse_uid: 14500
 concourse_group: "{{ concourse_user }}"

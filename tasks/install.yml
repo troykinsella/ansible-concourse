@@ -35,6 +35,7 @@
     group: "{{ concourse_group }}"
     mode: 0755
     force: yes
+    timeout: "{{ concourse_binary_fetch_timeout }}"
   become: yes
   when: needs_install
   register: binary_download
