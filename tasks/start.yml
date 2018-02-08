@@ -1,15 +1,27 @@
-- name: start web | concourse
+- name: configure web service | concourse
   service:
     name: concourse-web
-    state: started
-    enabled: yes
+    enabled: "{{ concourse_service_enabled }}"
   become: yes
   when: concourse_web
 
-- name: start worker | concourse
+- name: configure worker service | concourse
+  service:
+    name: concourse-worker
+    enabled: "{{ concourse_service_enabled }}"
+  become: yes
+  when: concourse_worker
+
+- name: start web service | concourse
+  service:
+    name: concourse-web
+    state: started
+  become: yes
+  when: concourse_web and concourse_service_enabled
+
+- name: start worker service | concourse
   service:
     name: concourse-worker
     state: started
-    enabled: yes
   become: yes
-  when: concourse_worker
+  when: concourse_worker and concourse_service_enabled

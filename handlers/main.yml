@@ -20,7 +20,7 @@
     enabled: yes
   become: yes
   become_user: root
-  when: concourse_web
+  when: concourse_web and concourse_service_enabled
 
 - name: restart concourse worker
   service:
@@ -29,4 +29,4 @@
     enabled: yes
   become: yes
   become_user: root
-  when: concourse_worker
+  when: concourse_worker and concourse_service_enabled

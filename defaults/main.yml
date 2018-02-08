@@ -1,5 +1,5 @@
 ---
-concourse_version: 2.4.0
+concourse_version: 3.8.0
 concourse_install_dir: /opt/concourse
 concourse_binary_path: "{{ concourse_install_dir }}/concourse"
 concourse_binary_os: linux
@@ -10,6 +10,7 @@ concourse_uid: 14500
 concourse_group: "{{ concourse_user }}"
 concourse_gid: "{{ concourse_uid }}"
 concourse_force_restart: no
+concourse_service_enabled: yes
 
 # Web variables
 
