@@ -73,4 +73,7 @@ exec {{ concourse_install_dir }}/concourse web \
 {%- for team in concourse_main_team_github_teams %}
   --main-team-github-team "{{ team }}" \
 {%- endfor %}
+{%- if concourse_auth_duration %}
+  --auth-duration "{{ concourse_auth_duration }}"
+{%- endif %}
   {{ concourse_web_options }}
