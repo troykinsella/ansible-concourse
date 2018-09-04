@@ -4,6 +4,11 @@
 
 An Ansible role to manage [Concourse CI](https://concourse-ci.org).
 
+## Branches
+
+* `master`: Concourse 4.x
+* `support/3.x`: Concourse 3.x
+
 ## Role Variables
 
 See `defaults/main.yml` for default values. Many of these variables map sensibly to options supplied
@@ -31,7 +36,26 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 * `concourse_session_signing_key`: Required. The session signing key.
 * `concourse_host_key`: Required. The host key.
 * `concourse_authorized_worker_keys`: Required. Concatenated authorized worker keys.
+* `concourse_external_url`: Optional. The URL at which any ATC can be reached from the outside.
+* `concourse_encryption_key`: Optional. A 16 or 32 length key used to encrypt sensitive data before storing
+  it in the database 
+* `concourse_old_encryption_key`: Optional. An encryption key previously used. If provided without a new key, 
+  data is encrypted. If provided with a new key, data is re-encrypted. 
 * `concourse_web_options`: Optional. Other non-managed options to pass to `concourse`.
+
+#### Web PostgreSQL Variables
+
+* `concourse_postgres_host`: Optional. The Postgres host to connect to.
+* `concourse_postgres_port`: Optional. The Postgres port to connect to.
+* `concourse_postgres_socket`: Optional. The path to a Unix domain socket to connect to.
+* `concourse_postgres_user`: Optional. The Postgres user to sign in as. 
+* `concourse_postgres_password`: Optional. The Postgres user's password.
+* `concourse_postgres_ssl_mode`: Optional. Whether or not to use SSL with the Postgres connection.
+* `concourse_postgres_ca_cert`: Optional. The Postgres CA cert file location.
+* `concourse_postgres_client_cert`: Optional. The Postgres client cert file location.
+* `concourse_postgres_client_key`: Optional. The Postgres client key file location.
+* `concourse_postgres_connect_timeout`: Optional. The Postgres dialing timeout.
+* `concourse_postgres_database`: Optional. The Postgres database name.
 
 #### Web Local Authentication Variables
 
@@ -73,22 +97,24 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
         concourse_web: yes
         concourse_authorized_worker_keys:
         - "{{ worker1_public_key }}"
+        concourse_postgres_host: concoursedb.abc123.us-east-1.rds.amazonaws.com
+        concourse_postgres_user: concourse
+        concourse_postgres_password: changeme
+        concourse_postgres_database: concourse
         concourse_local_users:
         - name: admin
           password: my_bcrypted_password
         concourse_main_team_local_users:
         - admin
-        concourse_web_options: |
-          --postgres-data-source postgres://concourse:changeme@concoursedb.abc123.us-east-1.rds.amazonaws.com/concourse \
-          --external-url http://concourse.example.com
+        concourse_external_url: http://concourse.example.com
 
-    - hosts: worker1
+    - hosts: workers
       roles:
       - role: troykinsella.concourse
         concourse_worker: yes
         concourse_tsa_host: my-atc
         concourse_tsa_public_key: "{{ host_pub_key }}"
-        concourse_tsa_worker_key: "{{ worker1_key }}"
+        concourse_tsa_worker_key: "{{ worker_key }}"
         concourse_worker_options: |
           --garden-network-pool 10.254.0.0/16 \
           --garden-max-containers 1024

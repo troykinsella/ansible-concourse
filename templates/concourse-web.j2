@@ -7,17 +7,63 @@ exec {{ concourse_install_dir }}/concourse web \
   --tsa-host-key "{{ concourse_host_key_path }}" \
   --tsa-authorized-keys "{{ concourse_authorized_worker_keys_path }}" \
   --cli-artifacts-dir "{{ concourse_cli_artifacts_dir }}" \
+{%- if concourse_external_url %}
+  --external-url "{{ concourse_external_url }}" \
+{%- endif %}
+{%- if concourse_encryption_key %}
+  --encryption-key "{{ concourse_encryption_key }}" \
+{%- endif %}
+{%- if concourse_old_encryption_key %}
+  --old-encryption-key "{{ concourse_old_encryption_key }}" \
+{%- endif %}
+{%- if concourse_postgres_host %}
+  --postgres-host "{{ concourse_postgres_host }}" \
+{%- endif %}
+{%- if concourse_postgres_port %}
+  --postgres-port {{ concourse_postgres_port }} \
+{%- endif %}
+{%- if concourse_postgres_socket %}
+  --postgres-socket {{ concourse_postgres_socket }} \
+{%- endif %}
+{%- if concourse_postgres_user %}
+  --postgres-user "{{ concourse_postgres_user }}" \
+{%- endif %}
+{%- if concourse_postgres_password %}
+  --postgres-password "{{ concourse_postgres_password }}" \
+{%- endif %}
+{%- if concourse_postgres_ssl_mode %}
+  --postgres-sslmode "{{ concourse_postgres_ssl_mode }}" \
+{%- endif %}
+{%- if concourse_postgres_ca_cert %}
+  --postgres-ca-cert "{{ concourse_postgres_ca_cert }}" \
+{%- endif %}
+{%- if concourse_postgres_client_cert %}
+  --postgres-client-cert "{{ concourse_postgres_client_cert }}" \
+{%- endif %}
+{%- if concourse_postgres_client_key %}
+  --postgres-client-key "{{ concourse_postgres_client_key }}" \
+{%- endif %}
+{%- if concourse_postgres_connect_timeout %}
+  --postgres-connect-timeout "{{ concourse_postgres_connect_timeout }}" \
+{%- endif %}
+{%- if concourse_postgres_database %}
+  --postgres-database "{{ concourse_postgres_database }}" \
+{%- endif %}
 {%- for user in concourse_local_users %}
   --add-local-user "{{ user.name }}:{{ user.password }}" \
 {%- endfor %}
 {%- for name in concourse_main_team_local_users %}
   --main-team-local-use "{{ name }}" \
 {%- endfor %}
-{% if concourse_main_team_allow_all_users %}
+{%- if concourse_main_team_allow_all_users %}
   --main-team-allow-all-users true \
 {%- endif %}
-{%- if concourse_github_client_id %}--github-client-id "{{ concourse_github_client_id }}" \{% endif %}
-{%- if concourse_github_client_secret %}--github-client-secret "{{ concourse_github_client_secret }}" \{% endif %}
+{%- if concourse_github_client_id %}
+  --github-client-id "{{ concourse_github_client_id }}" \
+{%- endif %}
+{%- if concourse_github_client_secret %}
+  --github-client-secret "{{ concourse_github_client_secret }}" \
+{%- endif %}
 {%- for name in concourse_main_team_github_users %}
   --main-team-gitlab-user "{{ name }}" \
 {%- endfor %}

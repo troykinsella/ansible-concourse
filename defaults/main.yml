@@ -15,15 +15,32 @@ concourse_service_enabled: yes
 # Web variables
 
 concourse_web: no
+#concourse_external_url:
 concourse_web_launcher_path: "{{ concourse_install_dir }}/concourse-web"
 concourse_cli_artifacts_dir: "{{ concourse_install_dir }}/cli-artifacts"
 concourse_authorized_worker_keys_path: "{{ concourse_install_dir }}/authorized_worker_keys"
 concourse_host_key_path: "{{ concourse_install_dir }}/host_key"
 concourse_session_signing_key_path: "{{ concourse_install_dir }}/session_signing_key"
+#concourse_encryption_key:
+#concourse_old_encryption_key:
 #concourse_session_signing_key:
 #concourse_host_key:
 #concourse_authorized_worker_keys: []
 #concourse_web_options:
+
+# Web PostgreSQL variables
+
+#concourse_postgres_host:
+#concourse_postgres_port:
+#concourse_postgres_socket:
+concourse_postgres_user: concourse
+#concourse_postgres_password:
+#concourse_postgres_ssl_mode:
+#concourse_postgres_ca_cert:
+#concourse_postgres_client_cert:
+#concourse_postgres_client_key:
+#concourse_postgres_connect_timeout:
+concourse_postgres_database: concourse
 
 # Web local authentication variables
 
