@@ -3,8 +3,28 @@
 # {{ ansible_managed }}
 
 exec {{ concourse_install_dir }}/concourse web \
-  --session-signing-key {{ concourse_session_signing_key_path }} \
-  --tsa-host-key {{ concourse_host_key_path }} \
-  --tsa-authorized-keys {{ concourse_authorized_worker_keys_path }} \
-  --cli-artifacts-dir {{ concourse_cli_artifacts_dir }} \
+  --session-signing-key "{{ concourse_session_signing_key_path }}" \
+  --tsa-host-key "{{ concourse_host_key_path }}" \
+  --tsa-authorized-keys "{{ concourse_authorized_worker_keys_path }}" \
+  --cli-artifacts-dir "{{ concourse_cli_artifacts_dir }}" \
+{%- for user in concourse_local_users %}
+  --add-local-user "{{ user.name }}:{{ user.password }}" \
+{%- endfor %}
+{%- for name in concourse_main_team_local_users %}
+  --main-team-local-use "{{ name }}" \
+{%- endfor %}
+{% if concourse_main_team_allow_all_users %}
+  --main-team-allow-all-users true \
+{%- endif %}
+{%- if concourse_github_client_id %}--github-client-id "{{ concourse_github_client_id }}" \{% endif %}
+{%- if concourse_github_client_secret %}--github-client-secret "{{ concourse_github_client_secret }}" \{% endif %}
+{%- for name in concourse_main_team_github_users %}
+  --main-team-gitlab-user "{{ name }}" \
+{%- endfor %}
+{%- for org in concourse_main_team_github_orgs %}
+  --main-team-github-org "{{ org }}" \
+{%- endfor %}
+{%- for team in concourse_main_team_github_teams %}
+  --main-team-github-team "{{ team }}" \
+{%- endfor %}
   {{ concourse_web_options }}

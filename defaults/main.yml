@@ -1,5 +1,5 @@
 ---
-concourse_version: 4.0.0
+concourse_version: 4.1.0
 concourse_install_dir: /opt/concourse
 concourse_binary_path: "{{ concourse_install_dir }}/concourse"
 concourse_binary_os: linux
@@ -24,6 +24,20 @@ concourse_session_signing_key_path: "{{ concourse_install_dir }}/session_signing
 #concourse_host_key:
 #concourse_authorized_worker_keys: []
 #concourse_web_options:
+
+# Web local authentication variables
+
+concourse_local_users: []
+concourse_main_team_local_users: []
+concourse_main_team_allow_all_users: no
+
+# Web GitHub authentication variables
+
+concourse_github_client_id:
+concourse_github_client_secret:
+concourse_main_team_github_users: []
+concourse_main_team_github_orgs: []
+concourse_main_team_github_teams: []
 
 # Worker variables
 
