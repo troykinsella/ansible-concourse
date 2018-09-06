@@ -8,7 +8,6 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-    - wily
     - xenial
   galaxy_tags:
     - concourse

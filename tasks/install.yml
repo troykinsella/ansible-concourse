@@ -8,6 +8,7 @@
 
 - name: get binary version | concourse
   command: "{{ concourse_binary_path }} -v"
+  become: yes
   register: installed_version
   when: binary.stat is defined and binary.stat.exists
 
@@ -29,11 +30,11 @@
 
 - name: download binary | concourse
   get_url:
-    url: https://github.com/concourse/concourse/releases/download/v{{ concourse_version }}/concourse_{{ concourse_binary_os }}_{{ concourse_binary_arch }}
+    url: "{{ concourse_download_url }}"
     dest: "{{ concourse_binary_path }}"
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: 0755
+    mode: "{{ concourse_binary_mode }}"
     force: yes
     timeout: "{{ concourse_binary_fetch_timeout }}"
   become: yes
@@ -42,6 +43,14 @@
   notify:
   - restart concourse web
   - restart concourse worker
+
+- name: binary permissions | concourse
+  file:
+    path: "{{ concourse_binary_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: "{{ concourse_binary_mode }}"
+  become: yes
 
 - name: install web | concourse
   include: install-web.yml

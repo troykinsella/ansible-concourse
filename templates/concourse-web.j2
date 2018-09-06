@@ -7,73 +7,76 @@ exec {{ concourse_install_dir }}/concourse web \
   --tsa-host-key "{{ concourse_host_key_path }}" \
   --tsa-authorized-keys "{{ concourse_authorized_worker_keys_path }}" \
   --cli-artifacts-dir "{{ concourse_cli_artifacts_dir }}" \
-{%- if concourse_external_url %}
+{% if concourse_external_url %}
   --external-url "{{ concourse_external_url }}" \
-{%- endif %}
-{%- if concourse_encryption_key %}
+{% endif %}
+{% if concourse_encryption_key is defined %}
   --encryption-key "{{ concourse_encryption_key }}" \
-{%- endif %}
-{%- if concourse_old_encryption_key %}
+{% endif %}
+{% if concourse_old_encryption_key is defined %}
   --old-encryption-key "{{ concourse_old_encryption_key }}" \
-{%- endif %}
-{%- if concourse_postgres_host %}
+{% endif %}
+{% if concourse_postgres_host is defined %}
   --postgres-host "{{ concourse_postgres_host }}" \
-{%- endif %}
-{%- if concourse_postgres_port %}
+{% endif %}
+{% if concourse_postgres_port is defined %}
   --postgres-port {{ concourse_postgres_port }} \
-{%- endif %}
-{%- if concourse_postgres_socket %}
+{% endif %}
+{% if concourse_postgres_socket is defined %}
   --postgres-socket {{ concourse_postgres_socket }} \
-{%- endif %}
-{%- if concourse_postgres_user %}
+{% endif %}
+{% if concourse_postgres_user is defined %}
   --postgres-user "{{ concourse_postgres_user }}" \
-{%- endif %}
-{%- if concourse_postgres_password %}
+{% endif %}
+{% if concourse_postgres_password is defined %}
   --postgres-password "{{ concourse_postgres_password }}" \
-{%- endif %}
-{%- if concourse_postgres_ssl_mode %}
+{% endif %}
+{% if concourse_postgres_ssl_mode is defined %}
   --postgres-sslmode "{{ concourse_postgres_ssl_mode }}" \
-{%- endif %}
-{%- if concourse_postgres_ca_cert %}
+{% endif %}
+{% if concourse_postgres_ca_cert is defined %}
   --postgres-ca-cert "{{ concourse_postgres_ca_cert }}" \
-{%- endif %}
-{%- if concourse_postgres_client_cert %}
+{% endif %}
+{% if concourse_postgres_client_cert is defined %}
   --postgres-client-cert "{{ concourse_postgres_client_cert }}" \
-{%- endif %}
-{%- if concourse_postgres_client_key %}
+{% endif %}
+{% if concourse_postgres_client_key is defined %}
   --postgres-client-key "{{ concourse_postgres_client_key }}" \
-{%- endif %}
-{%- if concourse_postgres_connect_timeout %}
+{% endif %}
+{% if concourse_postgres_connect_timeout is defined %}
   --postgres-connect-timeout "{{ concourse_postgres_connect_timeout }}" \
-{%- endif %}
-{%- if concourse_postgres_database %}
+{% endif %}
+{% if concourse_postgres_database is defined %}
   --postgres-database "{{ concourse_postgres_database }}" \
-{%- endif %}
-{%- for user in concourse_local_users %}
+{% endif %}
+{% for user in concourse_local_users %}
   --add-local-user "{{ user.name }}:{{ user.password }}" \
-{%- endfor %}
-{%- for name in concourse_main_team_local_users %}
-  --main-team-local-use "{{ name }}" \
-{%- endfor %}
-{%- if concourse_main_team_allow_all_users %}
-  --main-team-allow-all-users true \
-{%- endif %}
-{%- if concourse_github_client_id %}
+{% endfor %}
+{% for name in concourse_main_team_local_users %}
+  --main-team-local-user "{{ name }}" \
+{% endfor %}
+{% if concourse_main_team_allow_all_users %}
+  --main-team-allow-all-users \
+{% endif %}
+{% if concourse_github_client_id is defined %}
   --github-client-id "{{ concourse_github_client_id }}" \
-{%- endif %}
-{%- if concourse_github_client_secret %}
+{% endif %}
+{% if concourse_github_client_secret is defined %}
   --github-client-secret "{{ concourse_github_client_secret }}" \
-{%- endif %}
-{%- for name in concourse_main_team_github_users %}
+{% endif %}
+{% for name in concourse_main_team_github_users %}
   --main-team-gitlab-user "{{ name }}" \
-{%- endfor %}
-{%- for org in concourse_main_team_github_orgs %}
+{% endfor %}
+{% for org in concourse_main_team_github_orgs %}
   --main-team-github-org "{{ org }}" \
-{%- endfor %}
-{%- for team in concourse_main_team_github_teams %}
+{% endfor %}
+{% for team in concourse_main_team_github_teams %}
   --main-team-github-team "{{ team }}" \
-{%- endfor %}
-{%- if concourse_auth_duration %}
+{% endfor %}
+{% if concourse_auth_duration is defined %}
   --auth-duration "{{ concourse_auth_duration }}"
-{%- endif %}
+{% endif %}
+{% if concourse_web_options is defined %}
   {{ concourse_web_options }}
+{% endif %}
+  ;

@@ -4,6 +4,22 @@
 
 An Ansible role to manage [Concourse CI](https://concourse-ci.org).
 
+## Scope
+
+This role understands how to manage a Concourse CI web (ATC) or worker service installation.
+
+It:
+* Creates a Concourse user with which to run the daemon process.
+* Installs a `systemd` service called `concourse-web` and/or `concourse-worker`.
+* Fetches the Concourse binary executable from the official site.
+* Creates a wrapper script that defines options passed into the binary executable.
+* Installs necessary ssh key files provided through variables.
+
+It does not:
+* Generate ssh key-pairs.
+* Manage the Postgres database.
+* Manage any cloud infrastructure.
+
 ## Branches
 
 * `master`: Concourse 4.x
@@ -21,6 +37,9 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 * `concourse_binary_path`: Optional. The path to the Concourse binary.
 * `concourse_binary_os`: Optional. The operating system for which to fetch the Concourse binary.
 * `concourse_binary_arch`: Optional. The system architecture for which to fetch the Concourse binary.
+* `concourse_binary_mode`: Optional. The file mode of the concourse binary.
+* `concourse_download_url`: Optional. The URL at which the concourse binary can be downloaded. Normally only variables 
+  such as `concourse_binary_os` or `concourse_version` need to be adjusted to configure the download URL.
 * `concourse_user`: Optional. The user that will own the Concourse install directory and the running process.
 * `concourse_group`: Optional. The group that will own the Concourse install directory and the running process.
 * `concourse_force_restart`: Optional. Triggers a restart of the web and/or worker services regardless as to whether or not configuration has changed.
@@ -29,6 +48,7 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 
 * `concourse_web`: Optional. Set to "yes" to install the Concourse ATC.
 * `concourse_web_launcher_path`: Optional. The path to the script that launches the Concourse web process.
+* `concourse_web_launcher_mode`: Optional. The file mode of the web launcher script.
 * `concourse_cli_artifacts_dir`: Optional. The value of the `--cli-artifacts-dir` option.
 * `concourse_authorized_worker_keys_path`: Optional. The path to the authorized worker keys file.
 * `concourse_host_key_path`: Optional. The path to the host key file.
@@ -81,12 +101,13 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 
 * `concourse_worker`: Optional. Set to "yes" to install a Concourse worker.
 * `concourse_worker_launcher_path`: Optional. The path to the script that launches the Concourse worker process.
+* `concourse_worker_launcher_mode`: Optional. The file mode of the web launcher script.
 * `concourse_work_dir`: Optional. The directory in which the worker does work.
 * `concourse_tsa_public_key_path`: Optional. The path to the tsa public key file.
 * `concourse_tsa_worker_key_path`: Optional. The path to the worker private key file.
 * `concourse_tsa_host`: Required. The value of the `--tsa-host` option.
 * `concourse_tsa_public_key`: Required. The tsa public key.
-* `concourse_tsa_worker_key`: Required. The tas worker private key.
+* `concourse_tsa_worker_key`: Required. The tsa worker private key.
 * `concourse_worker_tag`: Optional. The value of the `--tag` option.
 * `concourse_worker_options`: Optional. Other non-managed options to pass to `concourse`.
 
@@ -97,11 +118,11 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
       - role: troykinsella.concourse
         concourse_web: yes
         concourse_authorized_worker_keys:
-        - "{{ worker1_public_key }}"
+        - "{{ worker_public_key }}"
         concourse_postgres_host: concoursedb.abc123.us-east-1.rds.amazonaws.com
         concourse_postgres_user: concourse
         concourse_postgres_password: changeme
-        concourse_postgres_database: concourse
+        concourse_postgres_database: atc
         concourse_local_users:
         - name: admin
           password: my_bcrypted_password
@@ -120,8 +141,24 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
           --garden-network-pool 10.254.0.0/16 \
           --garden-max-containers 1024
 
-License
--------
+## Testing
+
+Prerequisites:
+* Python 2
+* Ruby
+* Ansible (duh)
+* Serverspec
+
+To run serverspec tests in a Vagrant machine:
+
+```bash
+> vagrant up
+> rake
+```
+
+Take a peek at the UI: `http://192.168.66.10:8080/`
+
+## License
 
 MIT © Troy Kinsella
 

@@ -12,4 +12,5 @@
     comment: Concourse CI
     uid: "{{ concourse_uid }}"
     group: "{{ concourse_group }}"
-
+    shell: "/bin/false"
+    createhome: no
