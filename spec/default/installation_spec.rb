@@ -43,6 +43,8 @@ describe file('/opt/concourse/authorized_worker_keys') do
   it { should be_grouped_into 'concourse'}
   it { should be_mode 400 }
 
+  puts "FREAKIN PATH: #{File.join(Dir.pwd, "spec/default/fixtures/worker_key.pub")}"
+
   fixture = File.read(File.join(Dir.pwd, "spec/default/fixtures/worker_key.pub")).strip + "\n"
   its(:content) { should eq fixture }
 end
