@@ -23,15 +23,17 @@ install:
   - ansible --version
 
 script:
+  - "ls -altR"
+
   # Check the role/playbook's syntax
   - "ansible-playbook -i test-inventory test-playbook.yml --syntax-check || exit 1"
 
   # Run the playbook
-  - "ansible-playbook -i test-inventory test-playbook.yml --connection=local --sudo || exit 1"
+  - "ansible-playbook -i test-inventory test-playbook.yml --connection=local --become || exit 1"
 
   # Run the playbook again, checking to make sure it's idempotent
   - >
-    ansible-playbook -i test-inventory test-playbook.yml --connection=local --sudo
+    ansible-playbook -i test-inventory test-playbook.yml --connection=local --become
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)

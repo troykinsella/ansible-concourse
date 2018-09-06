@@ -10,6 +10,7 @@
   command: "{{ concourse_binary_path }} -v"
   become: yes
   register: installed_version
+  changed_when: false
   when: binary.stat is defined and binary.stat.exists
 
 - name: check needs install | concourse
