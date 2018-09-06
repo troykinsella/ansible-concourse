@@ -23,8 +23,6 @@ install:
   - ansible --version
 
 script:
-  - "ls -altR"
-
   # Check the role/playbook's syntax
   - "ansible-playbook -i test-inventory test-playbook.yml --syntax-check || exit 1"
 
@@ -37,9 +35,6 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
-
-  # Run serverspec tests
-  - "TEST_ENV=local rake"
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
