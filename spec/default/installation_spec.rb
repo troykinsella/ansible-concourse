@@ -43,7 +43,7 @@ describe file('/opt/concourse/authorized_worker_keys') do
   it { should be_grouped_into 'concourse'}
   it { should be_mode 400 }
 
-  fixture = File.read(File.join(File.dirname(__FILE__), "fixtures/worker_key.pub")).strip + "\n"
+  fixture = File.read(File.join(Dir.pwd, "spec/default/fixtures/worker_key.pub")).strip + "\n"
   its(:content) { should eq fixture }
 end
 
@@ -54,7 +54,7 @@ describe file('/opt/concourse/host_key') do
   it { should be_grouped_into 'concourse'}
   it { should be_mode 400 }
 
-  fixture = File.read(File.join(File.dirname(__FILE__), "fixtures/host_key")).strip
+  fixture = File.read(File.join(Dir.pwd, "spec/default/fixtures/host_key")).strip
   its(:content) { should eq fixture }
 end
 
@@ -65,7 +65,7 @@ describe file('/opt/concourse/session_signing_key') do
   it { should be_grouped_into 'concourse'}
   it { should be_mode 400 }
 
-  fixture = File.read(File.join(File.dirname(__FILE__), "fixtures/session_signing_key")).strip
+  fixture = File.read(File.join(Dir.pwd, "spec/default/fixtures/session_signing_key")).strip
   its(:content) { should eq fixture }
 end
 
@@ -94,7 +94,7 @@ describe file('/opt/concourse/worker_key') do
   it { should be_grouped_into 'concourse'}
   it { should be_mode 400 }
 
-  fixture = File.read(File.join(File.dirname(__FILE__), "fixtures/worker_key")).strip
+  fixture = File.read(File.join(Dir.pwd, "spec/default/fixtures/worker_key")).strip
   its(:content) { should eq fixture }
 end
 
@@ -105,6 +105,6 @@ describe file('/opt/concourse/host_key.pub') do
   it { should be_grouped_into 'concourse'}
   it { should be_mode 400 }
 
-  fixture = File.read(File.join(File.dirname(__FILE__), "fixtures/host_key.pub")).strip
+  fixture = File.read(File.join(Dir.pwd, "spec/default/fixtures/host_key.pub")).strip
   its(:content) { should eq fixture }
 end
