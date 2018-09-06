@@ -11,6 +11,7 @@ addons:
     packages:
     - python-pip
     - ruby
+    - systemd
 
 install:
   - gem install serverspec
