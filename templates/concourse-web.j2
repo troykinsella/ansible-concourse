@@ -80,7 +80,7 @@ exec {{ concourse_install_dir }}/concourse web \
   --main-team-github-team "{{ team }}" \
 {% endfor %}
 {% if concourse_auth_duration is defined %}
-  --auth-duration "{{ concourse_auth_duration }}"
+  --auth-duration "{{ concourse_auth_duration }}" \
 {% endif %}
 {% if concourse_web_options is defined %}
   {{ concourse_web_options }}
