@@ -7,6 +7,12 @@ exec {{ concourse_install_dir }}/concourse web \
   --tsa-host-key "{{ concourse_host_key_path }}" \
   --tsa-authorized-keys "{{ concourse_authorized_worker_keys_path }}" \
   --cli-artifacts-dir "{{ concourse_cli_artifacts_dir }}" \
+{% if concourse_bind_ip is defined %}
+  --bind-ip "{{ concourse_bind_ip }}" \
+{% endif %}
+{% if concourse_bind_port is defined %}
+  --bind-port "{{ concourse_bind_port }}" \
+{% endif %}
 {% if concourse_external_url %}
   --external-url "{{ concourse_external_url }}" \
 {% endif %}
