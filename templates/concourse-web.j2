@@ -65,7 +65,7 @@ exec {{ concourse_install_dir }}/concourse web \
   --github-client-secret "{{ concourse_github_client_secret }}" \
 {% endif %}
 {% for name in concourse_main_team_github_users %}
-  --main-team-gitlab-user "{{ name }}" \
+  --main-team-github-user "{{ name }}" \
 {% endfor %}
 {% for org in concourse_main_team_github_orgs %}
   --main-team-github-org "{{ org }}" \
