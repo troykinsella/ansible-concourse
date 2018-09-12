@@ -19,6 +19,7 @@ concourse_service_enabled: yes
 concourse_web: no
 #concourse_bind_ip
 #concourse_bind_port
+#concourse_peer_url
 #concourse_external_url:
 concourse_web_launcher_path: "{{ concourse_install_dir }}/concourse-web"
 concourse_web_launcher_mode: "0700"

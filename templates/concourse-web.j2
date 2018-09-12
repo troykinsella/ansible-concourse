@@ -13,6 +13,9 @@ exec {{ concourse_install_dir }}/concourse web \
 {% if concourse_bind_port is defined %}
   --bind-port "{{ concourse_bind_port }}" \
 {% endif %}
+{% if concourse_peer_url is defined %}
+  --peer-url "{{ concourse_peer_url }}" \
+{% endif %}
 {% if concourse_external_url %}
   --external-url "{{ concourse_external_url }}" \
 {% endif %}

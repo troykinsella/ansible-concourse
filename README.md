@@ -58,6 +58,7 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 * `concourse_authorized_worker_keys`: Required. Concatenated authorized worker keys.
 * `concourse_bind_ip`: Optional. The IP address on which to listen to web traffic.
 * `concourse_bind_port`: Optional. The port on which to listen for HTTP traffic.
+* `concourse_peer_url`: Optional. The URL at which this ATC can be reached from other ATCs in the cluster.
 * `concourse_external_url`: Optional. The URL at which any ATC can be reached from the outside.
 * `concourse_encryption_key`: Optional. A 16 or 32 length key used to encrypt sensitive data before storing
   it in the database 
