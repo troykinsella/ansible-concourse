@@ -10,6 +10,9 @@ exec {{ concourse_install_dir }}/concourse worker \
 {% if concourse_worker_tag is defined %}
   --tag "{{ concourse_worker_tag }}" \
 {% endif %}
+{% if concourse_log_level is defined %}
+  --log-level "{{ concourse_log_level }}" \
+{% endif %}
 {% if concourse_worker_options is defined %}
   {{ concourse_worker_options }}
 {% endif %}

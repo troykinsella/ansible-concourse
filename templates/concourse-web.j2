@@ -85,6 +85,9 @@ exec {{ concourse_install_dir }}/concourse web \
 {% if concourse_auth_duration is defined %}
   --auth-duration "{{ concourse_auth_duration }}" \
 {% endif %}
+{% if concourse_log_level is defined %}
+  --log-level "{{ concourse_log_level }}" \
+{% endif %}
 {% if concourse_web_options is defined %}
   {{ concourse_web_options }}
 {% endif %}

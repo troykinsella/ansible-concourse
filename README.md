@@ -43,6 +43,7 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 * `concourse_user`: Optional. The user that will own the Concourse install directory and the running process.
 * `concourse_group`: Optional. The group that will own the Concourse install directory and the running process.
 * `concourse_force_restart`: Optional. Triggers a restart of the web and/or worker services regardless as to whether or not configuration has changed.
+* `concourse_log_level`: Optional. The minimum level of logs to see. [debug|info|error|fatal]
 
 ### Web Variables
 
