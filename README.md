@@ -6,7 +6,7 @@ An Ansible role to manage [Concourse CI](https://concourse-ci.org).
 
 ## Scope
 
-This role understands how to manage a Concourse CI web (ATC) or worker service installation.
+This role understands how to manage a Concourse CI web (ATC/TSA) or worker service installation.
 
 It:
 * Creates a Concourse user with which to run the daemon process.
@@ -20,9 +20,15 @@ It does not:
 * Manage the Postgres database.
 * Manage any cloud infrastructure.
 
+## Installation
+
+```bash
+ansible-galaxy install troykinsella.concourse
+```
+
 ## Branches
 
-* `master`: Concourse 4.x
+* `master`: Concourse 4.x (published to Ansible Galaxy)
 * `support/3.x`: Concourse 3.x
 
 ## Role Variables
