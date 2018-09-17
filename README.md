@@ -85,7 +85,7 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 #### Web Local Authentication Variables
 
 * `concourse_local_users`: Optional. A list of concourse user credentials that are added as local users. 
-  Entries are objects having `name` and `password` fields (see example). Passwords must be bcrypted.
+  Entries are objects having `name` and `password` fields (see example). Passwords can be plain text or bcrypted.
 * `concourse_main_team_local_users`: Optional. List of whitelisted local concourse users (of the supplied local user list).
 * `concourse_main_team_allow_all_users`: Optional. Set to `true` to whitelist all logged in users on the system.
 

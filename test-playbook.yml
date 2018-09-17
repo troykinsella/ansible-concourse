@@ -15,7 +15,7 @@
     concourse_postgres_host: localhost
     concourse_local_users:
     - name: "admin"
-      password: "$2y$12$zC93VotYq3cCwTTEZ/2o6uZA8VLITcdzoDbmfYH4ofMf1l1NRlal2" # admin
+      password: "admin"
     concourse_main_team_local_users:
     - admin
   - role: ./
