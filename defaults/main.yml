@@ -76,4 +76,5 @@ concourse_tsa_worker_key_path: "{{ concourse_install_dir }}/worker_key"
 #concourse_tsa_public_key:
 #concourse_tsa_worker_key:
 #concourse_worker_tag:
+#concourse_garden_docker_registry:
 #concourse_worker_options:
