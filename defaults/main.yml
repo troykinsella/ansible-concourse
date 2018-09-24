@@ -7,6 +7,7 @@ concourse_binary_arch: amd64
 concourse_binary_fetch_timeout: 30
 concourse_binary_mode: "0750"
 concourse_download_url: "https://github.com/concourse/concourse/releases/download/v{{ concourse_version }}/concourse_{{ concourse_binary_os }}_{{ concourse_binary_arch }}"
+concourse_manage_user: yes
 concourse_user: concourse
 concourse_uid: 14500
 concourse_group: "{{ concourse_user }}"

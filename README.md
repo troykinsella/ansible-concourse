@@ -46,6 +46,8 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 * `concourse_binary_mode`: Optional. The file mode of the concourse binary.
 * `concourse_download_url`: Optional. The URL at which the concourse binary can be downloaded. Normally only variables 
   such as `concourse_binary_os` or `concourse_version` need to be adjusted to configure the download URL.
+* `concourse_manage_user`: Optional. Create and manage the concourse user and group. Otherwise, the 
+  `concourse_user` and `concourse_group` are expected to be available / managed externally.
 * `concourse_user`: Optional. The user that will own the Concourse install directory and the running process.
 * `concourse_group`: Optional. The group that will own the Concourse install directory and the running process.
 * `concourse_force_restart`: Optional. Triggers a restart of the web and/or worker services regardless as to whether or not configuration has changed.

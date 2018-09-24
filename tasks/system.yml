@@ -4,6 +4,7 @@
   group:
     name: "{{ concourse_group }}"
     gid: "{{ concourse_gid }}"
+  when: concourse_manage_user
 
 - name: concourse user
   become: yes
@@ -14,3 +15,4 @@
     group: "{{ concourse_group }}"
     shell: "/bin/false"
     createhome: no
+  when: concourse_manage_user
