@@ -31,3 +31,27 @@
   become: yes
   notify:
   - restart concourse web
+
+- name: tls certificate | concourse
+  copy:
+    content: "{{ concourse_tls_certificate }}"
+    dest: "{{ concourse_tls_certificate_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: 0400
+  become: yes
+  when: concourse_tls_certificate is defined
+  notify:
+  - restart concourse web
+
+- name: tls key | concourse
+  copy:
+    content: "{{ concourse_tls_key }}"
+    dest: "{{ concourse_tls_key_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: 0400
+  become: yes
+  when: concourse_tls_key is defined
+  notify:
+  - restart concourse web

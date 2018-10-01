@@ -19,9 +19,14 @@ concourse_service_enabled: yes
 # Web variables
 
 concourse_web: no
-#concourse_bind_ip
-#concourse_bind_port
-#concourse_peer_url
+#concourse_bind_ip:
+#concourse_bind_port:
+#concourse_tls_bind_port: 443
+#concourse_tls_certificate:
+concourse_tls_certificate_path: "{{ concourse_install_dir }}/tls_cert"
+#concourse_tls_key:
+concourse_tls_key_path: "{{ concourse_install_dir }}/tls_key"
+#concourse_peer_url:
 #concourse_external_url:
 concourse_web_launcher_path: "{{ concourse_install_dir }}/concourse-web"
 concourse_web_launcher_mode: "0700"

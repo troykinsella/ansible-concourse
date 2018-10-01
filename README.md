@@ -67,6 +67,13 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 * `concourse_authorized_worker_keys`: Required. Concatenated authorized worker keys.
 * `concourse_bind_ip`: Optional. The IP address on which to listen to web traffic.
 * `concourse_bind_port`: Optional. The port on which to listen for HTTP traffic.
+* `concourse_tls_bind_port`: Optional. The port on which to listen for HTTPS traffic.
+* `concourse_tls_certificate`: Optional. The content of the TLS certificate to use for HTTPS termination.
+* `concourse_tls_certificate_path`: Optional. The remote file path of the TLS certificate to use for HTTPS termination.
+  Normally, only `concourse_tls_certificate` needs to be defined.  
+* `concourse_tls_key`: Optional. Optional. The content of the TLS key to use for HTTPS termination.
+* `concourse_tls_key_path`: Optional. The remote file path of the TLS key to use for HTTPS termination.
+  Normally, only `concourse_tls_key` needs to be defined. 
 * `concourse_peer_url`: Optional. The URL at which this ATC can be reached from other ATCs in the cluster.
 * `concourse_external_url`: Optional. The URL at which any ATC can be reached from the outside.
 * `concourse_encryption_key`: Optional. A 16 or 32 length key used to encrypt sensitive data before storing

@@ -13,6 +13,15 @@ exec {{ concourse_install_dir }}/concourse web \
 {% if concourse_bind_port is defined %}
   --bind-port "{{ concourse_bind_port }}" \
 {% endif %}
+{% if concourse_tls_bind_port is defined %}
+  --tls-bind-port "{{ concourse_tls_bind_port }}" \
+{% endif %}
+{% if concourse_tls_certificate is defined %}
+  --tls-cert "{{ concourse_tls_certificate_path }}" \
+{% endif %}
+{% if concourse_tls_key is defined %}
+  --tls-key "{{ concourse_tls_key_path }}" \
+{% endif %}
 {% if concourse_peer_url is defined %}
   --peer-url "{{ concourse_peer_url }}" \
 {% endif %}
