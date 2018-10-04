@@ -40,6 +40,7 @@ concourse_session_signing_key_path: "{{ concourse_install_dir }}/session_signing
 #concourse_host_key:
 #concourse_authorized_worker_keys: []
 #concourse_auth_duration:
+#concourse_resource_checking_interval:
 #concourse_web_options:
 
 # Web PostgreSQL variables

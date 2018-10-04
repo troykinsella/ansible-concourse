@@ -80,7 +80,8 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
   it in the database 
 * `concourse_old_encryption_key`: Optional. An encryption key previously used. If provided without a new key, 
   data is encrypted. If provided with a new key, data is re-encrypted.
-* `concourse_auth_duration`: Optional. The length of time for which tokens are valid. 
+* `concourse_auth_duration`: Optional. The length of time for which tokens are valid.
+* `concourse_resource_checking_interval`: Optional. Interval on which to check for new versions of resources. 
 * `concourse_web_options`: Optional. Other non-managed options to pass to `concourse`.
 
 #### Web PostgreSQL Variables
