@@ -129,6 +129,7 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 * `concourse_tsa_public_key`: Required. The tsa public key.
 * `concourse_tsa_worker_key`: Required. The tsa worker private key.
 * `concourse_worker_tag`: Optional. The value of the `--tag` option.
+* `concourse_baggageclaim_driver`: Optional. The driver to use for managing volumes.
 * `concourse_garden_docker_registry`: Optional. Docker registry API endpoint.
 * `concourse_worker_options`: Optional. Other non-managed options to pass to `concourse`.
 
