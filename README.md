@@ -39,15 +39,9 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 ### General
 
 * `concourse_version`: Optional. The version of Concourse to install.
-* `concourse_install_dir`: Optional. The directory path to which to put the Concourse binary and config files.
-* `concourse_binary_path`: Optional. The path to the Concourse binary.
-* `concourse_binary_os`: Optional. The operating system for which to fetch the Concourse binary.
-* `concourse_binary_arch`: Optional. The system architecture for which to fetch the Concourse binary.
-* `concourse_binary_mode`: Optional. The file mode of the concourse binary.
-* `concourse_download_url`: Optional. The URL at which the concourse binary can be downloaded. Normally only variables 
-  such as `concourse_binary_os` or `concourse_version` need to be adjusted to configure the download URL.
-* `concourse_manage_user`: Optional. Create and manage the concourse user and group. Otherwise, the 
-  `concourse_user` and `concourse_group` are expected to be available / managed externally.
+* `concourse_install_dir`: Optional. The directory path into which the Concourse tarball is extracted.
+* `concourse_archive_os`: Optional. The operating system for which to fetch the Concourse binary.
+* `concourse_archive_arch`: Optional. The system architecture for which to fetch the Concourse binary.
 * `concourse_user`: Optional. The user that will own the Concourse install directory and the running process.
 * `concourse_group`: Optional. The group that will own the Concourse install directory and the running process.
 * `concourse_force_restart`: Optional. Triggers a restart of the web and/or worker services regardless as to whether or not configuration has changed.
@@ -130,7 +124,6 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 * `concourse_tsa_worker_key`: Required. The tsa worker private key.
 * `concourse_worker_tag`: Optional. The value of the `--tag` option.
 * `concourse_baggageclaim_driver`: Optional. The driver to use for managing volumes.
-* `concourse_garden_docker_registry`: Optional. Docker registry API endpoint.
 * `concourse_worker_options`: Optional. Other non-managed options to pass to `concourse`.
 
 ## Example Playbook

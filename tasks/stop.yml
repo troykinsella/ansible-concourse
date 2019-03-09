@@ -1,4 +1,4 @@
-- name: stop web | concourse
+- name: stop web
   service:
     name: concourse-web
     state: stopped
@@ -6,7 +6,7 @@
   ignore_errors: yes
   when: concourse_web
 
-- name: stop worker | concourse
+- name: stop worker
   service:
     name: concourse-worker
     state: stopped

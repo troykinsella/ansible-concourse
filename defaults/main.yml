@@ -1,12 +1,18 @@
 ---
-concourse_version: 4.2.0
-concourse_install_dir: /opt/concourse
-concourse_binary_path: "{{ concourse_install_dir }}/concourse"
-concourse_binary_os: linux
-concourse_binary_arch: amd64
-concourse_binary_fetch_timeout: 30
+concourse_version: 5.0.0
+concourse_install_prefix_dir: /opt
+concourse_install_dir: "{{ concourse_install_prefix_dir }}/concourse"
+concourse_binary_path: "{{ concourse_install_dir }}/bin/concourse"
+concourse_etc_dir: "{{ concourse_install_dir }}/etc"
+concourse_archive_name: concourse-{{ concourse_version }}-{{ concourse_archive_os }}-{{ concourse_archive_arch }}.tgz
+concourse_archive_url: https://github.com/concourse/concourse/releases/download/v{{ concourse_version }}/{{ concourse_archive_name }}
+concourse_archive_checksum: sha256:fbc7539b473a39121a3a8b1d8cb36671ef19bb1629c647b5058e596062f5b216
+concourse_archive_os: linux
+concourse_archive_arch: amd64
+concourse_archive_fetch_timeout: 30
+concourse_archive_delete_after_unarchive: yes
 concourse_binary_mode: "0750"
-concourse_download_url: "https://github.com/concourse/concourse/releases/download/v{{ concourse_version }}/concourse_{{ concourse_binary_os }}_{{ concourse_binary_arch }}"
+concourse_etc_files_mode: "0400"
 concourse_manage_user: yes
 concourse_user: concourse
 concourse_uid: 14500
@@ -20,20 +26,20 @@ concourse_service_enabled: yes
 
 concourse_web: no
 #concourse_bind_ip:
-#concourse_bind_port:
+#concourse_bind_port: 8080
 #concourse_tls_bind_port: 443
 #concourse_tls_certificate:
-concourse_tls_certificate_path: "{{ concourse_install_dir }}/tls_cert"
+concourse_tls_certificate_path: "{{ concourse_etc_dir }}/tls_cert"
 #concourse_tls_key:
-concourse_tls_key_path: "{{ concourse_install_dir }}/tls_key"
+concourse_tls_key_path: "{{ concourse_etc_dir }}/tls_key"
 #concourse_peer_url:
 #concourse_external_url:
-concourse_web_launcher_path: "{{ concourse_install_dir }}/concourse-web"
+concourse_web_launcher_path: "{{ concourse_etc_dir }}/concourse-web"
 concourse_web_launcher_mode: "0700"
-concourse_cli_artifacts_dir: "{{ concourse_install_dir }}/cli-artifacts"
-concourse_authorized_worker_keys_path: "{{ concourse_install_dir }}/authorized_worker_keys"
-concourse_host_key_path: "{{ concourse_install_dir }}/host_key"
-concourse_session_signing_key_path: "{{ concourse_install_dir }}/session_signing_key"
+concourse_cli_artifacts_dir: "{{ concourse_install_dir }}/fly-assets"
+concourse_authorized_worker_keys_path: "{{ concourse_etc_dir }}/authorized_worker_keys"
+concourse_host_key_path: "{{ concourse_etc_dir }}/host_key"
+concourse_session_signing_key_path: "{{ concourse_etc_dir }}/session_signing_key"
 #concourse_encryption_key:
 #concourse_old_encryption_key:
 #concourse_session_signing_key:
@@ -61,7 +67,6 @@ concourse_session_signing_key_path: "{{ concourse_install_dir }}/session_signing
 
 concourse_local_users: []
 concourse_main_team_local_users: []
-concourse_main_team_allow_all_users: no
 
 # Web GitHub authentication variables
 
@@ -74,15 +79,14 @@ concourse_main_team_github_teams: []
 # Worker variables
 
 concourse_worker: no
-concourse_worker_launcher_path: "{{ concourse_install_dir }}/concourse-worker"
+concourse_worker_launcher_path: "{{ concourse_etc_dir }}/concourse-worker"
 concourse_worker_launcher_mode: "0700"
 concourse_work_dir: "{{ concourse_install_dir }}/work"
-concourse_tsa_public_key_path: "{{ concourse_install_dir }}/host_key.pub"
-concourse_tsa_worker_key_path: "{{ concourse_install_dir }}/worker_key"
+concourse_tsa_public_key_path: "{{ concourse_etc_dir }}/host_key.pub"
+concourse_tsa_worker_key_path: "{{ concourse_etc_dir }}/worker_key"
 #concourse_tsa_host:
 #concourse_tsa_public_key:
 #concourse_tsa_worker_key:
 #concourse_worker_tag:
 #concourse_baggageclaim_driver:
-#concourse_garden_docker_registry:
 #concourse_worker_options:

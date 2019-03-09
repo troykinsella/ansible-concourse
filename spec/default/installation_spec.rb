@@ -10,7 +10,7 @@ describe file('/opt/concourse') do
   it { should be_mode 755 }
 end
 
-describe file('/opt/concourse/concourse') do
+describe file('/opt/concourse/bin/concourse') do
   it { should exist }
   it { should be_file }
   it { should be_owned_by 'concourse' }
@@ -20,14 +20,6 @@ end
 
 # Web
 
-describe file('/opt/concourse/cli-artifacts') do
-  it { should exist }
-  it { should be_directory }
-  it { should be_owned_by 'concourse' }
-  it { should be_grouped_into 'concourse'}
-  it { should be_mode 755 }
-end
-
 describe file('/opt/concourse/concourse-web') do
   it { should exist }
   it { should be_file }
@@ -36,20 +28,18 @@ describe file('/opt/concourse/concourse-web') do
   it { should be_mode 700 }
 end
 
-describe file('/opt/concourse/authorized_worker_keys') do
+describe file('/opt/concourse/etc/authorized_worker_keys') do
   it { should exist }
   it { should be_file }
   it { should be_owned_by 'concourse' }
   it { should be_grouped_into 'concourse'}
   it { should be_mode 400 }
 
-  puts "FREAKIN PATH: #{File.join(Dir.pwd, "spec/default/fixtures/worker_key.pub")}"
-
   fixture = File.read(File.join(Dir.pwd, "spec/default/fixtures/worker_key.pub")).strip + "\n"
   its(:content) { should eq fixture }
 end
 
-describe file('/opt/concourse/host_key') do
+describe file('/opt/concourse/etc/host_key') do
   it { should exist }
   it { should be_file }
   it { should be_owned_by 'concourse' }
@@ -60,7 +50,7 @@ describe file('/opt/concourse/host_key') do
   its(:content) { should eq fixture }
 end
 
-describe file('/opt/concourse/session_signing_key') do
+describe file('/opt/concourse/etc/session_signing_key') do
   it { should exist }
   it { should be_file }
   it { should be_owned_by 'concourse' }
@@ -89,7 +79,7 @@ describe file('/opt/concourse/concourse-worker') do
   it { should be_mode 700 }
 end
 
-describe file('/opt/concourse/worker_key') do
+describe file('/opt/concourse/etc/worker_key') do
   it { should exist }
   it { should be_file }
   it { should be_owned_by 'concourse' }
@@ -100,7 +90,7 @@ describe file('/opt/concourse/worker_key') do
   its(:content) { should eq fixture }
 end
 
-describe file('/opt/concourse/host_key.pub') do
+describe file('/opt/concourse/etc/host_key.pub') do
   it { should exist }
   it { should be_file }
   it { should be_owned_by 'concourse' }

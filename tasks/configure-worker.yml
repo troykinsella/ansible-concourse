@@ -1,22 +1,22 @@
 ---
-- name: tsa public key | concourse
+- name: copy tsa public key
   copy:
     content: "{{ concourse_tsa_public_key }}"
     dest: "{{ concourse_tsa_public_key_path }}"
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: 0400
+    mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
   - restart concourse worker
 
-- name: worker key | concourse
+- name: copy worker key
   copy:
     content: "{{ concourse_tsa_worker_key }}"
     dest: "{{ concourse_tsa_worker_key_path }}"
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: 0400
+    mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
   - restart concourse worker

@@ -17,16 +17,16 @@
   service:
     name: concourse-web
     state: restarted
-    enabled: yes
   become: yes
-  become_user: root
   when: concourse_web and concourse_service_enabled
 
 - name: restart concourse worker
   service:
     name: concourse-worker
     state: restarted
-    enabled: yes
   become: yes
-  become_user: root
   when: concourse_worker and concourse_service_enabled
+
+- name: systemd daemon reload
+  command: systemd daemon-reload
+  become: yes

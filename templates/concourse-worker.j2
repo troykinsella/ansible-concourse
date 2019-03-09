@@ -2,7 +2,7 @@
 
 # {{ ansible_managed }}
 
-exec {{ concourse_install_dir }}/concourse worker \
+exec {{ concourse_binary_path }} worker \
   --tsa-host "{{ concourse_tsa_host }}" \
   --tsa-public-key "{{ concourse_tsa_public_key_path }}" \
   --tsa-worker-private-key "{{ concourse_tsa_worker_key_path }}" \
@@ -16,8 +16,8 @@ exec {{ concourse_install_dir }}/concourse worker \
 {% if concourse_baggageclaim_driver is defined %}
   --baggageclaim-driver "{{ concourse_baggageclaim_driver }}" \
 {% endif %}
-{% if concourse_garden_docker_registry is defined %}
-  --garden-docker-registry "{{ concourse_garden_docker_registry }}" \
+{% if concourse_garden_config is defined %}
+--garden-config {{concourse_garden_config}} \
 {% endif %}
 {% if concourse_worker_options is defined %}
   {{ concourse_worker_options }}
