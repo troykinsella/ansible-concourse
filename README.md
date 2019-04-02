@@ -9,9 +9,10 @@ An Ansible role to manage [Concourse CI](https://concourse-ci.org).
 This role understands how to manage a Concourse CI web (ATC/TSA) or worker service installation.
 
 It:
-* Creates a Concourse user with which to run the daemon process.
+* (Optionally) creates a `concourse` user and group with which to run the daemon process.
+* (Optionally) formats and mounts a volume in which 
 * Installs a `systemd` service called `concourse-web` and/or `concourse-worker`.
-* Fetches the Concourse binary executable from the official site.
+* Fetches the Concourse binary tarball from the official site.
 * Creates a wrapper script that defines options passed into the binary executable.
 * Installs necessary ssh key files provided through variables.
 

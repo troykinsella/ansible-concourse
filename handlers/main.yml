@@ -28,5 +28,6 @@
   when: concourse_worker and concourse_service_enabled
 
 - name: systemd daemon reload
-  command: systemd daemon-reload
+  systemd:
+    daemon_reload: yes
   become: yes

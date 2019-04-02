@@ -17,9 +17,6 @@
   set_fact:
     needs_install: "{{ not binary.stat.exists or installed_version is defined and installed_version.stdout != concourse_version }}"
 
-- include: stop.yml
-  when: needs_install
-
 - name: download archive
   get_url:
     url: "{{ concourse_archive_url }}"
@@ -31,6 +28,9 @@
   become: yes
   when: needs_install
   register: binary_download
+
+- include: stop.yml
+  when: needs_install
 
 - name: unpack archive
   unarchive:
@@ -71,9 +71,9 @@
   become: yes
 
 - name: install web
-  include: install-web.yml
+  include: web/install.yml
   when: concourse_web
 
 - name: install worker
-  include: install-worker.yml
+  include: worker/install.yml
   when: concourse_worker

@@ -9,6 +9,9 @@
   become: yes
   become_user: root
 
+- include: filesystem.yml
+  when: concourse_manage_filesystem
+
 - name: create worker launch script
   template:
     src: concourse-worker.j2

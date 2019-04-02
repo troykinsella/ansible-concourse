@@ -1,5 +1,8 @@
 ---
-- include: system.yml
+
+- include: user.yml
+  when: concourse_manage_user
+
 - include: install.yml
 - include: configure.yml
 - include: start.yml
