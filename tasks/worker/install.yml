@@ -10,7 +10,7 @@
   become_user: root
 
 - include: filesystem.yml
-  when: concourse_manage_filesystem
+  when: concourse_manage_work_volume
 
 - name: create worker launch script
   template:

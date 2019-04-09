@@ -12,18 +12,6 @@ concourse_uid: 14500
 concourse_group: "{{ concourse_user }}"
 concourse_gid: "{{ concourse_uid }}"
 
-# Filesystem variables
-
-concourse_manage_filesystem: no
-#concourse_work_volume_device:
-concourse_work_volume_fs_type: "{% if concourse_baggageclaim_driver is defined and concourse_baggageclaim_driver == 'btrfs' %}btrfs{% else %}ext4{% endif %}"
-concourse_work_volume_fs_opts: ""
-concourse_work_volume_fs_force_create: no
-concourse_work_volume_fs_resize: no
-concourse_work_volume_mount_path: "{{ concourse_work_dir }}"
-concourse_work_volume_mount_opts: "rw,noatime,nodiratime"
-
-
 # Installation variables
 
 concourse_version: 5.0.1
@@ -40,6 +28,9 @@ concourse_archive_fetch_timeout: 30
 concourse_archive_delete_after_unarchive: yes
 concourse_binary_mode: "0750"
 concourse_etc_files_mode: "0400"
+
+# Common Variables
+
 concourse_service_enabled: yes
 #concourse_log_level: info
 
@@ -60,10 +51,10 @@ concourse_web_launcher_mode: "0700"
 concourse_cli_artifacts_dir: "{{ concourse_install_dir }}/fly-assets"
 concourse_authorized_worker_keys_path: "{{ concourse_etc_dir }}/authorized_worker_keys"
 concourse_host_key_path: "{{ concourse_etc_dir }}/host_key"
+#concourse_session_signing_key:
 concourse_session_signing_key_path: "{{ concourse_etc_dir }}/session_signing_key"
 #concourse_encryption_key:
 #concourse_old_encryption_key:
-#concourse_session_signing_key:
 #concourse_host_key:
 #concourse_authorized_worker_keys: []
 #concourse_auth_duration:
@@ -110,4 +101,17 @@ concourse_tsa_worker_key_path: "{{ concourse_etc_dir }}/worker_key"
 #concourse_tsa_worker_key:
 #concourse_worker_tag:
 #concourse_baggageclaim_driver:
+#concourse_garden_config:
+concourse_garden_config_path: "{{ concourse_etc_dir }}/garden.conf"
 #concourse_worker_options:
+
+# Worker filesystem variables
+
+concourse_manage_work_volume: no
+#concourse_work_volume_device:
+concourse_work_volume_fs_type: "{% if concourse_baggageclaim_driver is defined and concourse_baggageclaim_driver == 'btrfs' %}btrfs{% else %}ext4{% endif %}"
+concourse_work_volume_fs_opts: ""
+concourse_work_volume_fs_force_create: no
+concourse_work_volume_fs_resize: no
+concourse_work_volume_mount_path: "{{ concourse_work_dir }}"
+concourse_work_volume_mount_opts: "rw,noatime,nodiratime"
