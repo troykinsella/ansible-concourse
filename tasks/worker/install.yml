@@ -33,6 +33,9 @@
     force: yes
   become: yes
   become_user: root
+  register: concourse_worker_service
   notify:
   - restart concourse worker
   - systemd daemon reload
+  tags:
+  - no-test

@@ -198,19 +198,13 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 ## Testing
 
 Prerequisites:
-* Python 2
-* Ruby
-* Ansible (duh)
-* Serverspec
+* Install Docker
 
-To run serverspec tests in a Vagrant machine:
+To run serverspec tests:
 
 ```bash
-> vagrant up
-> rake
+docker build .
 ```
-
-Take a peek at the UI: `http://192.168.66.10:8080/`
 
 ## License
 

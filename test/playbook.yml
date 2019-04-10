@@ -1,14 +1,18 @@
 ---
-- hosts: default
-  remote_user: root
+- hosts: local
+  connection: local
+  vars:
+    concourse_archive_name: concourse.tar.gz
   roles:
-  - role: ./
+  - role: /role
+    tags:
+    - web
     concourse_web: yes
     concourse_session_signing_key: "{{ lookup('file', 'spec/default/fixtures/session_signing_key') }}"
     concourse_host_key: "{{ lookup('file', 'spec/default/fixtures/host_key') }}"
     concourse_authorized_worker_keys:
     - "{{ lookup('file', 'spec/default/fixtures/worker_key.pub') }}"
-    concourse_external_url: "http://192.168.66.10:8080/"
+    concourse_external_url: "http://localhost:8080/"
     concourse_postgres_database: atc
     concourse_postgres_user: concourse
     concourse_postgres_password: concourse
@@ -18,7 +22,9 @@
       password: "admin"
     concourse_main_team_local_users:
     - admin
-  - role: ./
+  - role: /role
+    tags:
+    - worker
     concourse_worker: yes
     concourse_tsa_host: "localhost:2222"
     concourse_tsa_public_key: "{{ lookup('file', 'spec/default/fixtures/host_key.pub') }}"

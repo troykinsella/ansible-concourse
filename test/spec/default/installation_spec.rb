@@ -20,7 +20,7 @@ end
 
 # Web
 
-describe file('/opt/concourse/concourse-web') do
+describe file('/opt/concourse/etc/concourse-web') do
   it { should exist }
   it { should be_file }
   it { should be_owned_by 'concourse' }
@@ -71,7 +71,7 @@ describe file('/opt/concourse/work') do
   it { should be_mode 750 }
 end
 
-describe file('/opt/concourse/concourse-worker') do
+describe file('/opt/concourse/etc/concourse-worker') do
   it { should exist }
   it { should be_file }
   it { should be_owned_by 'concourse' }

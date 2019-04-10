@@ -4,6 +4,8 @@
     enabled: "{{ concourse_service_enabled }}"
   become: yes
   when: concourse_web
+  tags:
+  - no-test
 
 - name: configure worker service
   service:
@@ -11,6 +13,8 @@
     enabled: "{{ concourse_service_enabled }}"
   become: yes
   when: concourse_worker
+  tags:
+  - no-test
 
 - name: start web service
   service:
@@ -18,6 +22,8 @@
     state: started
   become: yes
   when: concourse_web and concourse_service_enabled
+  tags:
+  - no-test
 
 - name: start worker service
   service:
@@ -25,3 +31,5 @@
     state: started
   become: yes
   when: concourse_worker and concourse_service_enabled
+  tags:
+  - no-test

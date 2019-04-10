@@ -20,6 +20,9 @@
     force: yes
   become: yes
   become_user: root
+  register: concourse_web_service
   notify:
   - restart concourse web
   - systemd daemon reload
+  tags:
+  - no-test

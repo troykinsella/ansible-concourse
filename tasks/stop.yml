@@ -5,6 +5,8 @@
   become: yes
   ignore_errors: yes
   when: concourse_web
+  tags:
+  - no-test
 
 - name: stop worker
   service:
@@ -13,3 +15,5 @@
   become: yes
   ignore_errors: yes
   when: concourse_worker
+  tags:
+  - no-test

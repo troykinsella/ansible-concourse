@@ -28,6 +28,8 @@
   become: yes
   when: needs_install
   register: binary_download
+  tags:
+  - no-test
 
 - include: stop.yml
   when: needs_install
@@ -41,7 +43,7 @@
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
   become: yes
-  when: binary_download is changed
+  when: binary_download is not defined or binary_download is changed
   notify:
   - restart concourse web
   - restart concourse worker
