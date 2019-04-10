@@ -2,7 +2,7 @@
 
 # {{ ansible_managed }}
 
-exec {{ concourse_install_dir }}/concourse web \
+exec {{ concourse_binary_path }} web \
   --session-signing-key "{{ concourse_session_signing_key_path }}" \
   --tsa-host-key "{{ concourse_host_key_path }}" \
   --tsa-authorized-keys "{{ concourse_authorized_worker_keys_path }}" \
@@ -73,9 +73,6 @@ exec {{ concourse_install_dir }}/concourse web \
 {% for name in concourse_main_team_local_users %}
   --main-team-local-user "{{ name }}" \
 {% endfor %}
-{% if concourse_main_team_allow_all_users %}
-  --main-team-allow-all-users \
-{% endif %}
 {% if concourse_github_client_id is defined %}
   --github-client-id "{{ concourse_github_client_id }}" \
 {% endif %}

@@ -1,6 +1,6 @@
 ---
-- include: configure-web.yml
+- include: web/configure.yml
   when: concourse_web
 
-- include: configure-worker.yml
+- include: worker/configure.yml
   when: concourse_worker

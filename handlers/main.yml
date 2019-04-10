@@ -4,29 +4,30 @@
     name: concourse-web
     state: stopped
   become: yes
-  when: concourse_web
+  when: concourse_web_service is defined and concourse_web
 
 - name: stop concourse worker
   service:
     name: concourse-worker
     state: stopped
   become: yes
-  when: concourse_worker
+  when: concourse_worker_service is defined and concourse_worker
 
 - name: restart concourse web
   service:
     name: concourse-web
     state: restarted
-    enabled: yes
   become: yes
-  become_user: root
-  when: concourse_web and concourse_service_enabled
+  when: concourse_web_service is defined and concourse_web and concourse_service_enabled
 
 - name: restart concourse worker
   service:
     name: concourse-worker
     state: restarted
-    enabled: yes
   become: yes
-  become_user: root
-  when: concourse_worker and concourse_service_enabled
+  when: concourse_worker_service is defined and concourse_worker and concourse_service_enabled
+
+- name: systemd daemon reload
+  systemd:
+    daemon_reload: yes
+  become: yes

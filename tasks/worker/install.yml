@@ -1,5 +1,5 @@
 ---
-- name: create work directory | concourse
+- name: create work directory
   file:
     path: "{{ concourse_work_dir }}"
     state: directory
@@ -9,7 +9,10 @@
   become: yes
   become_user: root
 
-- name: create worker launch script | concourse
+- include: filesystem.yml
+  when: concourse_manage_work_volume
+
+- name: create worker launch script
   template:
     src: concourse-worker.j2
     dest: "{{ concourse_worker_launcher_path }}"
@@ -22,7 +25,7 @@
   notify:
   - restart concourse worker
 
-- name: create worker service | concourse
+- name: create worker service
   template:
     src: concourse-worker.service.j2
     dest: /etc/systemd/system/concourse-worker.service
@@ -30,5 +33,9 @@
     force: yes
   become: yes
   become_user: root
+  register: concourse_worker_service
   notify:
   - restart concourse worker
+  - systemd daemon reload
+  tags:
+  - no-test

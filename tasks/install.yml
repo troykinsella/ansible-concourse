@@ -6,46 +6,56 @@
   ignore_errors: yes
   register: binary
 
-- name: get binary version | concourse
+- name: get concourse version
   command: "{{ concourse_binary_path }} -v"
   become: yes
   register: installed_version
   changed_when: false
   when: binary.stat is defined and binary.stat.exists
 
-- name: check needs install | concourse
+- name: check needs install
   set_fact:
     needs_install: "{{ not binary.stat.exists or installed_version is defined and installed_version.stdout != concourse_version }}"
 
-- name: create install directory | concourse
-  file:
-    path: "{{ concourse_install_dir }}"
-    state: directory
+- name: download archive
+  get_url:
+    url: "{{ concourse_archive_url }}"
+    dest: "{{ concourse_install_prefix_dir }}/{{ concourse_archive_name }}"
+    checksum: "{{ concourse_archive_checksum }}"
     mode: 0755
-    owner: "{{ concourse_user }}"
-    group: "{{ concourse_group }}"
+    force: no
+    timeout: "{{ concourse_archive_fetch_timeout }}"
   become: yes
+  when: needs_install
+  register: binary_download
+  tags:
+  - no-test
 
 - include: stop.yml
   when: needs_install
 
-- name: download binary | concourse
-  get_url:
-    url: "{{ concourse_download_url }}"
-    dest: "{{ concourse_binary_path }}"
+- name: unpack archive
+  unarchive:
+    src: "{{ concourse_install_prefix_dir }}/{{ concourse_archive_name }}"
+    dest: "{{ concourse_install_prefix_dir }}"
+    remote_src: yes
+    mode: 0755
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: "{{ concourse_binary_mode }}"
-    force: yes
-    timeout: "{{ concourse_binary_fetch_timeout }}"
   become: yes
-  when: needs_install
-  register: binary_download
+  when: binary_download is not defined or binary_download is changed
   notify:
   - restart concourse web
   - restart concourse worker
 
-- name: binary permissions | concourse
+- name: delete archive
+  file:
+    path: "{{ concourse_install_prefix_dir }}/{{ concourse_archive_name }}"
+    state: absent
+  become: yes
+  when: concourse_archive_delete_after_unarchive
+
+- name: binary permissions
   file:
     path: "{{ concourse_binary_path }}"
     owner: "{{ concourse_user }}"
@@ -53,10 +63,19 @@
     mode: "{{ concourse_binary_mode }}"
   become: yes
 
-- name: install web | concourse
-  include: install-web.yml
+- name: create etc dir
+  file:
+    path: "{{ concourse_etc_dir }}"
+    state: directory
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: 0750
+  become: yes
+
+- name: install web
+  include: web/install.yml
   when: concourse_web
 
-- name: install worker | concourse
-  include: install-worker.yml
+- name: install worker
+  include: worker/install.yml
   when: concourse_worker

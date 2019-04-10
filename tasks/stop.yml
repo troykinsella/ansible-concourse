@@ -1,15 +1,19 @@
-- name: stop web | concourse
+- name: stop web
   service:
     name: concourse-web
     state: stopped
   become: yes
   ignore_errors: yes
   when: concourse_web
+  tags:
+  - no-test
 
-- name: stop worker | concourse
+- name: stop worker
   service:
     name: concourse-worker
     state: stopped
   become: yes
   ignore_errors: yes
   when: concourse_worker
+  tags:
+  - no-test

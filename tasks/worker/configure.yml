@@ -1,0 +1,34 @@
+---
+- name: copy tsa public key
+  copy:
+    content: "{{ concourse_tsa_public_key }}"
+    dest: "{{ concourse_tsa_public_key_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: "{{ concourse_etc_files_mode }}"
+  become: yes
+  notify:
+  - restart concourse worker
+
+- name: copy worker key
+  copy:
+    content: "{{ concourse_tsa_worker_key }}"
+    dest: "{{ concourse_tsa_worker_key_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: "{{ concourse_etc_files_mode }}"
+  become: yes
+  notify:
+  - restart concourse worker
+
+- name: copy garden configuration file
+  copy:
+    content: "{{ concourse_garden_config }}"
+    dest: "{{ concourse_garden_config_path }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: "{{ concourse_etc_files_mode }}"
+  become: yes
+  notify:
+  - restart concourse worker
+  when: concourse_garden_config is defined

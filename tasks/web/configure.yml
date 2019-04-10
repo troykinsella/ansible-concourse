@@ -1,33 +1,33 @@
 ---
-- name: host key | concourse
+- name: copy host key
   copy:
     content: "{{ concourse_host_key }}"
     dest: "{{ concourse_host_key_path }}"
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: 0400
+    mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
   - restart concourse web
 
-- name: session signing key | concourse
+- name: copy session signing key
   copy:
     content: "{{ concourse_session_signing_key }}"
     dest: "{{ concourse_session_signing_key_path }}"
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: 0400
+    mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
   - restart concourse web
 
-- name: authorized worker keys | concourse
+- name: copy authorized worker keys
   template:
     src: authorized_worker_keys.j2
     dest: "{{ concourse_authorized_worker_keys_path }}"
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: 0400
+    mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
   - restart concourse web
@@ -38,7 +38,7 @@
     dest: "{{ concourse_tls_certificate_path }}"
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: 0400
+    mode: "{{ concourse_etc_files_mode }}"
   become: yes
   when: concourse_tls_certificate is defined
   notify:
@@ -50,7 +50,7 @@
     dest: "{{ concourse_tls_key_path }}"
     owner: "{{ concourse_user }}"
     group: "{{ concourse_group }}"
-    mode: 0400
+    mode: "{{ concourse_etc_files_mode }}"
   become: yes
   when: concourse_tls_key is defined
   notify:

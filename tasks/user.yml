@@ -1,13 +1,11 @@
 ---
 - name: concourse group
-  become: yes
   group:
     name: "{{ concourse_group }}"
     gid: "{{ concourse_gid }}"
-  when: concourse_manage_user
+  become: yes
 
 - name: concourse user
-  become: yes
   user:
     name: "{{ concourse_user }}"
     comment: Concourse CI
@@ -15,4 +13,4 @@
     group: "{{ concourse_group }}"
     shell: "/bin/false"
     createhome: no
-  when: concourse_manage_user
+  become: yes

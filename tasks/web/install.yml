@@ -1,15 +1,5 @@
 ---
-- name: create cli-artifacts directory | concourse
-  file:
-    path: "{{ concourse_cli_artifacts_dir }}"
-    state: directory
-    mode: 0755
-    owner: "{{ concourse_user }}"
-    group: "{{ concourse_group }}"
-  become: yes
-  become_user: root
-
-- name: create web launch script | concourse
+- name: create web launch script
   template:
     src: concourse-web.j2
     dest: "{{ concourse_web_launcher_path }}"
@@ -22,7 +12,7 @@
   notify:
   - restart concourse web
 
-- name: create web service | concourse
+- name: create web service
   template:
     src: concourse-web.service.j2
     dest: /etc/systemd/system/concourse-web.service
@@ -30,5 +20,9 @@
     force: yes
   become: yes
   become_user: root
+  register: concourse_web_service
   notify:
   - restart concourse web
+  - systemd daemon reload
+  tags:
+  - no-test
