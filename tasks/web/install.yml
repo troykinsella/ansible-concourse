@@ -8,7 +8,6 @@
     mode: "{{ concourse_web_launcher_mode }}"
     force: yes
   become: yes
-  become_user: root
   notify:
   - restart concourse web
 
@@ -19,7 +18,6 @@
     owner: root
     force: yes
   become: yes
-  become_user: root
   register: concourse_web_service
   notify:
   - restart concourse web

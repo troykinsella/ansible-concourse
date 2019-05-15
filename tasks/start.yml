@@ -21,7 +21,7 @@
     name: concourse-web
     state: started
   become: yes
-  when: concourse_web and concourse_service_enabled
+  when: concourse_web and concourse_service_enabled and concourse_service_start
   tags:
   - no-test
 
@@ -30,6 +30,6 @@
     name: concourse-worker
     state: started
   become: yes
-  when: concourse_worker and concourse_service_enabled
+  when: concourse_worker and concourse_service_enabled and concourse_service_start
   tags:
   - no-test

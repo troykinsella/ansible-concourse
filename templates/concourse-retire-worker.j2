@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# {{ ansible_managed }}
+
+set -e
+
+NAME=${1:-$(hostname)}
+
+{{ concourse_binary_path }} retire-worker \
+  --name $NAME \
+  --tsa-host "{{ concourse_tsa_host }}" \
+  --tsa-public-key "{{ concourse_tsa_public_key_path }}" \
+  --tsa-worker-private-key "{{ concourse_tsa_worker_key_path }}"

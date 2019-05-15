@@ -17,7 +17,8 @@ concourse_gid: "{{ concourse_uid }}"
 concourse_version: 5.0.1
 concourse_install_prefix_dir: /opt
 concourse_install_dir: "{{ concourse_install_prefix_dir }}/concourse"
-concourse_binary_path: "{{ concourse_install_dir }}/bin/concourse"
+concourse_bin_dir: "{{ concourse_install_dir }}/bin"
+concourse_binary_path: "{{ concourse_bin_dir }}/concourse"
 concourse_etc_dir: "{{ concourse_install_dir }}/etc"
 concourse_archive_name: concourse-{{ concourse_version }}-{{ concourse_archive_os }}-{{ concourse_archive_arch }}.tgz
 concourse_archive_url: https://github.com/concourse/concourse/releases/download/v{{ concourse_version }}/{{ concourse_archive_name }}
@@ -32,6 +33,7 @@ concourse_etc_files_mode: "0400"
 # Common Variables
 
 concourse_service_enabled: yes
+concourse_service_start: yes
 #concourse_log_level: info
 
 # Web variables
@@ -46,7 +48,7 @@ concourse_tls_certificate_path: "{{ concourse_etc_dir }}/tls_cert"
 concourse_tls_key_path: "{{ concourse_etc_dir }}/tls_key"
 #concourse_peer_url:
 #concourse_external_url:
-concourse_web_launcher_path: "{{ concourse_etc_dir }}/concourse-web"
+concourse_web_launcher_path: "{{ concourse_bin_dir }}/concourse-web"
 concourse_web_launcher_mode: "0700"
 concourse_cli_artifacts_dir: "{{ concourse_install_dir }}/fly-assets"
 concourse_authorized_worker_keys_path: "{{ concourse_etc_dir }}/authorized_worker_keys"
@@ -91,8 +93,12 @@ concourse_main_team_github_teams: []
 # Worker variables
 
 concourse_worker: no
-concourse_worker_launcher_path: "{{ concourse_etc_dir }}/concourse-worker"
-concourse_worker_launcher_mode: "0700"
+concourse_worker_launcher_path: "{{ concourse_bin_dir }}/concourse-worker"
+concourse_worker_binary_mode: "0700"
+concourse_worker_land_path: "{{ concourse_bin_dir }}/concourse-land-worker"
+concourse_worker_retire_path: "{{ concourse_bin_dir }}/concourse-retire-worker"
+concourse_worker_land_on_stop: no
+concourse_worker_retire_on_stop: yes
 concourse_work_dir: "{{ concourse_install_dir }}/work"
 concourse_tsa_public_key_path: "{{ concourse_etc_dir }}/host_key.pub"
 concourse_tsa_worker_key_path: "{{ concourse_etc_dir }}/worker_key"

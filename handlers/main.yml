@@ -18,14 +18,14 @@
     name: concourse-web
     state: restarted
   become: yes
-  when: concourse_web_service is defined and concourse_web and concourse_service_enabled
+  when: concourse_web_service is defined and concourse_web and concourse_service_enabled and concourse_service_start
 
 - name: restart concourse worker
   service:
     name: concourse-worker
     state: restarted
   become: yes
-  when: concourse_worker_service is defined and concourse_worker and concourse_service_enabled
+  when: concourse_worker_service is defined and concourse_worker and concourse_service_enabled and concourse_service_start
 
 - name: systemd daemon reload
   systemd:

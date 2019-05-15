@@ -10,7 +10,7 @@ This role understands how to manage a Concourse CI web (ATC/TSA) or worker servi
 
 It:
 * (Optionally) creates a `concourse` user and group with which to run the daemon process.
-* (Optionally) formats and mounts a volume in which Concourse is installed.
+* (Optionally) formats and mounts a volume in which Concourse work is done.
 * Installs a `systemd` service called `concourse-web` and/or `concourse-worker`.
 * Fetches the Concourse binary tarball from the official site.
 * Creates a wrapper script that captures options passed into the binary executable.
@@ -38,6 +38,9 @@ ansible-galaxy install troykinsella.concourse
 See `defaults/main.yml` for default values not specified below. Many of these variables map sensibly to options supplied
 to the concourse binary at launch time. Run `concourse web -h` or `concourse worker -h` for more detail.
 
+Note: The vast majority of variables have sensible defaults and normally need not be defined,
+but exist for when control over related behaviour is needed. See examples for a minimal configuration set.
+
 ### Maintenance Variables
 
 * `concourse_force_restart`: Optional. Default: "no". Triggers a restart of the web and/or worker services regardless as to whether or not configuration has changed.
@@ -56,6 +59,7 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 * `concourse_install_prefix_dir`: Optional. The prefix directory under which the Concourse installation directory will be placed. The Concourse tarball is also downloaded into this directory during installation.
 * `concourse_install_dir`: Optional. The directory path into which the Concourse tarball is extracted.
 * `concourse_binary_path`: Optional. The absolute path to the Concourse binary.
+* `concourse_bin_dir`: Optional. A directory in which the Concourse binary and related shell scripts live.
 * `concourse_etc_dir`: Optional. A directory in which Concourse-related generated or managed files are created.
 * `concourse_archive_name`: Optional. The file name of the Concourse release tarball to install.
 * `concourse_archive_url`: Optional. The URL at which the Concourse release tarball can be downloaded.
@@ -69,7 +73,8 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 
 ### Common Variables
 
-* `concourse_service_enabled`: Optional. Default: "yes". Manage a `systemd` service for a Concourse `web` and/or `worker` instance. 
+* `concourse_service_enabled`: Optional. Default: "yes". Manage a `systemd` service for a Concourse `web` and/or `worker` instance.
+* `concourse_service_start`: Optional. Default: "yes". Start the `systemd` service(s) for Concourse `web` and/or `worker`.
 * `concourse_log_level`: Optional. The minimum level of logs to see. [debug|info|error|fatal]
 
 ### Web Variables
@@ -139,7 +144,11 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 
 * `concourse_worker`: Optional. Set to "yes" to install a Concourse worker.
 * `concourse_worker_launcher_path`: Optional. The path to the script that launches the Concourse worker process.
-* `concourse_worker_launcher_mode`: Optional. The file mode of the web launcher script.
+* `concourse_worker_land_path`: Optional. The path to the script that lands a worker.
+* `concourse_worker_retire_path`: Optional. The path to the script that retires a worker.
+* `concourse_worker_binary_mode`: Optional. The file mode of the worker launcher, land, and retire scripts.
+* `concourse_worker_land_on_stop`: Optional. Default: "no". Run `concourse land-worker` upon stopping the service.
+* `concourse_worker_retire_on_stop`: Optional. Default: "yes". Run `concourse retire-worker` upon stopping the service.
 * `concourse_work_dir`: Optional. The directory in which the worker does work.
 * `concourse_tsa_public_key_path`: Optional. The path to the tsa public key file.
 * `concourse_tsa_worker_key_path`: Optional. The path to the worker private key file.
@@ -205,6 +214,11 @@ To run serverspec tests:
 ```bash
 docker build .
 ```
+
+## Contributors
+
+* [gaelL](https://github.com/gaelL)
+* [troykinsella](https://github.com/troykinsella) (Maintainer)
 
 ## License
 
