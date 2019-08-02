@@ -15,6 +15,7 @@ It:
 * Fetches the Concourse binary tarball from the official site.
 * Creates a wrapper script that captures options passed into the binary executable.
 * Installs necessary ssh key files, provided through variables.
+* (Optionally) enables Let's Encrypt using [Concourse' native support](https://concourse-ci.org/concourse-web.html#lets-encrypt) that was added in [5.3.0](https://github.com/concourse/concourse/releases/tag/v5.3.0)
 
 It does not:
 * Generate ssh key-pairs.
@@ -80,6 +81,7 @@ but exist for when control over related behaviour is needed. See examples for a 
 ### Web Variables
 
 * `concourse_web`: Optional. Set to "yes" to install the Concourse ATC.
+* `concourse_letsencrypt`: Optional. Set to "yes" to enable Concourse' native Let's Encrypt support.
 * `concourse_bind_ip`: Optional. The IP address on which to listen to web traffic.
 * `concourse_bind_port`: Optional. The port on which to listen for HTTP traffic.
 * `concourse_tls_bind_port`: Optional. The port on which to listen for HTTPS traffic.

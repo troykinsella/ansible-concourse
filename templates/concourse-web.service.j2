@@ -10,6 +10,10 @@ Restart=on-failure
 ExecStart={{ concourse_web_launcher_path }}
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGTERM
+{% if concourse_letsencrypt %}
+Environment=CONCOURSE_TLS_BIND_PORT=443
+Environment=CONCOURSE_ENABLE_LETS_ENCRYPT=true
+{% endif %}
 
 [Install]
 WantedBy=multi-user.target

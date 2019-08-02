@@ -39,6 +39,7 @@ concourse_service_start: yes
 # Web variables
 
 concourse_web: no
+concourse_letsencrypt: no
 #concourse_bind_ip:
 #concourse_bind_port: 8080
 #concourse_tls_bind_port: 443
