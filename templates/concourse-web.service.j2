@@ -7,6 +7,9 @@ After=network-online.target
 
 [Service]
 Restart=on-failure
+{% for env_var_name, env_var_value in concourse_web_env_vars.items() %}
+Environment={{ env_var_name }}={{ env_var_value }}
+{% endfor %}
 ExecStart={{ concourse_web_launcher_path }}
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGTERM

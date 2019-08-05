@@ -10,6 +10,9 @@ TasksMax=infinity
 LimitNOFILE=infinity
 LimitMEMLOCK=infinity
 Restart=on-failure
+{% for env_var_name, env_var_value in concourse_worker_env_vars.items() %}
+Environment={{ env_var_name }}={{ env_var_value }}
+{% endfor %}
 ExecStart={{ concourse_worker_launcher_path }}
 {% if concourse_worker_land_on_stop %}
 ExecStop={{ concourse_worker_land_path }}
