@@ -30,9 +30,13 @@ ansible-galaxy install troykinsella.concourse
 
 ## Branches
 
-* `master`: Concourse 5.x
+* `master`: Concourse 5.x (5.4.1)
 * `support/4.x`: Concourse 4.x
 * `support/3.x`: Concourse 3.x
+
+Note: Concourse makes backwards-incompatible command option changes within major versions, so these branches
+will likely not support early minor or patch revisions of a major version. The latest version
+used in testing is shown in brackets.
 
 ## Role Variables
 
@@ -91,7 +95,7 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_tls_key`: Optional. Optional. The content of the TLS key to use for HTTPS termination.
 * `concourse_tls_key_path`: Optional. The remote file path of the TLS key to use for HTTPS termination.
   Normally, only `concourse_tls_key` needs to be defined. 
-* `concourse_peer_url`: Optional. The URL at which this ATC can be reached from other ATCs in the cluster.
+* `concourse_peer_address`: Optional. The URL at which this ATC can be reached from other ATCs in the cluster.
 * `concourse_external_url`: Optional. The URL at which any ATC can be reached from the outside.
 * `concourse_web_launcher_path`: Optional. The path to the script that launches the Concourse web process.
 * `concourse_web_launcher_mode`: Optional. The file mode of the web launcher script.
@@ -109,6 +113,7 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_auth_duration`: Optional. The length of time for which tokens are valid.
 * `concourse_resource_checking_interval`: Optional. Interval on which to check for new versions of resources. 
 * `concourse_web_options`: Optional. Other non-managed options to pass to `concourse`.
+* `concourse_web_env`: Optional. A hash of environment variables made available to the `concourse web` process.
 
 #### Web PostgreSQL Variables
 
@@ -165,6 +170,7 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 * `concourse_garden_config_path`: Optional.
   Normally, only `concourse_garden_config` needs to be defined.  
 * `concourse_worker_options`: Optional. Other non-managed options to pass to `concourse`.
+* `concourse_worker_env`: Optional. A hash of environment variables made available to the `concourse worker` process.
 * `concourse_manage_work_volume`: Optional. Default: "no". Activate management of the work volume.
 * `concourse_work_volume_device`: Required when `concourse_manage_work_volume` is "yes". The device to mount as the work volume.
 * `concourse_work_volume_fs_type`: Optional. The filesystem type of the work volume. By default, this is calculated to be `btrfs` or `ext4` based on the value of `concourse_baggageclaim_driver`.

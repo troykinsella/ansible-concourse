@@ -2,6 +2,10 @@
 
 # {{ ansible_managed }}
 
+{% for key, value in concourse_web_env.items() %}
+export {{ key }}="{{ value }}"
+{% endfor %}
+
 exec {{ concourse_binary_path }} web \
   --session-signing-key "{{ concourse_session_signing_key_path }}" \
   --tsa-host-key "{{ concourse_host_key_path }}" \
@@ -22,8 +26,8 @@ exec {{ concourse_binary_path }} web \
 {% if concourse_tls_key is defined %}
   --tls-key "{{ concourse_tls_key_path }}" \
 {% endif %}
-{% if concourse_peer_url is defined %}
-  --peer-url "{{ concourse_peer_url }}" \
+{% if concourse_peer_address is defined %}
+  --peer-address "{{ concourse_peer_address }}" \
 {% endif %}
 {% if concourse_external_url %}
   --external-url "{{ concourse_external_url }}" \

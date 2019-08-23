@@ -14,7 +14,7 @@ concourse_gid: "{{ concourse_uid }}"
 
 # Installation variables
 
-concourse_version: 5.4.0
+concourse_version: 5.4.1
 concourse_install_prefix_dir: /opt
 concourse_install_dir: "{{ concourse_install_prefix_dir }}/concourse"
 concourse_bin_dir: "{{ concourse_install_dir }}/bin"
@@ -22,7 +22,7 @@ concourse_binary_path: "{{ concourse_bin_dir }}/concourse"
 concourse_etc_dir: "{{ concourse_install_dir }}/etc"
 concourse_archive_name: concourse-{{ concourse_version }}-{{ concourse_archive_os }}-{{ concourse_archive_arch }}.tgz
 concourse_archive_url: https://github.com/concourse/concourse/releases/download/v{{ concourse_version }}/{{ concourse_archive_name }}
-concourse_archive_checksum: sha256:ccc35f4ee5a9b9f5cba107040fe08815d0514d3dc52bc224af088271863f0f40
+concourse_archive_checksum: sha256:74711d5825ac831fbbe6c3e7dbce81d661da1c565bed382da75acfaae8c92ff7
 concourse_archive_os: linux
 concourse_archive_arch: amd64
 concourse_archive_fetch_timeout: 30
@@ -63,6 +63,7 @@ concourse_session_signing_key_path: "{{ concourse_etc_dir }}/session_signing_key
 #concourse_auth_duration:
 #concourse_resource_checking_interval:
 #concourse_web_options:
+concourse_web_env: {}
 
 # Web PostgreSQL variables
 
@@ -111,6 +112,7 @@ concourse_tsa_worker_key_path: "{{ concourse_etc_dir }}/worker_key"
 #concourse_garden_config:
 concourse_garden_config_path: "{{ concourse_etc_dir }}/garden.conf"
 #concourse_worker_options:
+concourse_worker_env: {}
 
 # Worker filesystem variables
 
