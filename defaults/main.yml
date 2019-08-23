@@ -62,6 +62,7 @@ concourse_session_signing_key_path: "{{ concourse_etc_dir }}/session_signing_key
 #concourse_auth_duration:
 #concourse_resource_checking_interval:
 #concourse_web_options:
+concourse_web_env: {}
 
 # Web PostgreSQL variables
 
@@ -110,6 +111,7 @@ concourse_tsa_worker_key_path: "{{ concourse_etc_dir }}/worker_key"
 #concourse_garden_config:
 concourse_garden_config_path: "{{ concourse_etc_dir }}/garden.conf"
 #concourse_worker_options:
+concourse_worker_env: {}
 
 # Worker filesystem variables
 

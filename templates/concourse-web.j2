@@ -2,6 +2,10 @@
 
 # {{ ansible_managed }}
 
+{% for key, value in concourse_web_env.items() %}
+export {{ key }}="{{ value }}"
+{% endfor %}
+
 exec {{ concourse_binary_path }} web \
   --session-signing-key "{{ concourse_session_signing_key_path }}" \
   --tsa-host-key "{{ concourse_host_key_path }}" \
