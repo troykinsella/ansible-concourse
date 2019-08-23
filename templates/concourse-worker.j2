@@ -2,6 +2,10 @@
 
 # {{ ansible_managed }}
 
+{% for key, value in concourse_worker_env.items() %}
+export {{ key }}="{{ value }}"
+{% endfor %}
+
 exec {{ concourse_binary_path }} worker \
   --tsa-host "{{ concourse_tsa_host }}" \
   --tsa-public-key "{{ concourse_tsa_public_key_path }}" \

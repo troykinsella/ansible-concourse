@@ -32,3 +32,12 @@
   notify:
   - restart concourse worker
   when: concourse_garden_config is defined
+
+- name: remove garden configuration file
+  file:
+    path: "{{ concourse_garden_config_path }}"
+    state: absent
+  become: yes
+  notify:
+  - restart concourse worker
+  when: concourse_garden_config is not defined
