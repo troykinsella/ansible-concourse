@@ -6,6 +6,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
+EnvironmentFile=-{{ concourse_env_file }}
 TasksMax=infinity
 LimitNOFILE=infinity
 LimitMEMLOCK=infinity

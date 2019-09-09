@@ -80,6 +80,10 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_service_enabled`: Optional. Default: "yes". Manage a `systemd` service for a Concourse `web` and/or `worker` instance.
 * `concourse_service_start`: Optional. Default: "yes". Start the `systemd` service(s) for Concourse `web` and/or `worker`.
 * `concourse_log_level`: Optional. The minimum level of logs to see. [debug|info|error|fatal]
+* `concourse_env_file`: Optional. A file containing environment variables which is fed into the `EnvironmentFile` attribute of the 
+  `systemd` service unit file. This is useful for configuration managed outside of the playbook. If
+  the configuration should be managed by the playbook, `concourse_web_env` and/or `concourse_worker_env` is
+  the better choice.
 
 ### Web Variables
 
