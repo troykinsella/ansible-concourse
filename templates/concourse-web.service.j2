@@ -6,6 +6,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
+EnvironmentFile=-{{ concourse_env_file }}
 Restart=on-failure
 ExecStart={{ concourse_web_launcher_path }}
 ExecReload=/bin/kill -HUP $MAINPID

@@ -35,6 +35,7 @@ concourse_etc_files_mode: "0400"
 concourse_service_enabled: yes
 concourse_service_start: yes
 #concourse_log_level: info
+concourse_environment_file: /etc/environment
 
 # Web variables
 
