@@ -20,9 +20,6 @@ exec {{ concourse_binary_path }} worker \
 {% if concourse_baggageclaim_driver is defined %}
   --baggageclaim-driver "{{ concourse_baggageclaim_driver }}" \
 {% endif %}
-{% if concourse_garden_config is defined %}
-  --garden-config "{{concourse_garden_config_path}}" \
-{% endif %}
 {% if concourse_worker_options is defined %}
   {{ concourse_worker_options }}
 {% endif %}

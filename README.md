@@ -29,7 +29,7 @@ ansible-galaxy install troykinsella.concourse
 
 ## Branches
 
-* `master`: Concourse 5.x (5.7.2)
+* `master`: Concourse 5.x (5.8.0)
 * `support/4.x`: Concourse 4.x
 * `support/3.x`: Concourse 3.x
 
@@ -166,11 +166,6 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 * `concourse_tsa_worker_key`: Required. The tsa worker private key.
 * `concourse_worker_tag`: Optional. The value of the `--tag` option.
 * `concourse_baggageclaim_driver`: Optional. The driver to use for managing volumes.
-* `concourse_garden_config`: Optional. Configuration values passed to Garden.
-  [This](https://github.com/cloudfoundry/garden-runc-release/blob/master/jobs/garden/templates/config/config.ini.erb)
-  seems to be the best reference for Garden configuration options as of the time of this writing.
-* `concourse_garden_config_path`: Optional.
-  Normally, only `concourse_garden_config` needs to be defined.  
 * `concourse_worker_options`: Optional. Other non-managed options to pass to `concourse`.
 * `concourse_worker_env`: Optional. A hash of environment variables made available to the `concourse worker` process.
 * `concourse_manage_work_volume`: Optional. Default: "no". Activate management of the work volume.
@@ -208,11 +203,10 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
         concourse_tsa_host: my-atc
         concourse_tsa_public_key: "{{ host_pub_key }}"
         concourse_tsa_worker_key: "{{ worker_key }}"
-        concourse_garden_config: |
-          [server]
-          network-pool = 10.254.0.0/16
-          max-containers = 1024
-          docker-registry = docker.my-private-registry.org
+        concourse_worker_env:
+          CONCOURSE_GARDEN_NETWORK_POOL: 10.254.0.0/16
+          CONCOURSE_GARDEN_MAX_CONTAINERS: 512
+          CONCOURSE_GARDEN_DOCKER_REGISTRY: https://docker.my-private-registry.org
 
 ## Testing
 

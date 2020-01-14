@@ -14,7 +14,7 @@ concourse_gid: "{{ concourse_uid }}"
 
 # Installation variables
 
-concourse_version: 5.7.2
+concourse_version: 5.8.0
 concourse_install_prefix_dir: /opt
 concourse_install_dir: "{{ concourse_install_prefix_dir }}/concourse"
 concourse_bin_dir: "{{ concourse_install_dir }}/bin"
@@ -22,7 +22,7 @@ concourse_binary_path: "{{ concourse_bin_dir }}/concourse"
 concourse_etc_dir: "{{ concourse_install_dir }}/etc"
 concourse_archive_name: concourse-{{ concourse_version }}-{{ concourse_archive_os }}-{{ concourse_archive_arch }}.tgz
 concourse_archive_url: https://github.com/concourse/concourse/releases/download/v{{ concourse_version }}/{{ concourse_archive_name }}
-concourse_archive_checksum: sha1:af8d070c0a31dd05627314503375e85900da757c
+concourse_archive_checksum: sha1:1988895c4c6ee94bdd48eb35c92ff45586ae5841
 concourse_archive_os: linux
 concourse_archive_arch: amd64
 concourse_archive_fetch_timeout: 30
@@ -109,8 +109,6 @@ concourse_tsa_worker_key_path: "{{ concourse_etc_dir }}/worker_key"
 #concourse_tsa_worker_key:
 #concourse_worker_tag:
 #concourse_baggageclaim_driver:
-#concourse_garden_config:
-concourse_garden_config_path: "{{ concourse_etc_dir }}/garden.conf"
 #concourse_worker_options:
 concourse_worker_env: {}
 
