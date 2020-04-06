@@ -21,6 +21,12 @@
   when: concourse_web_service is defined and concourse_web and concourse_service_enabled and concourse_service_start
 
 - name: restart concourse worker
+  pause:
+    seconds: 10
+  notify:
+    - restart concourse worker after pause
+
+- name: restart concourse worker after pause
   service:
     name: concourse-worker
     state: restarted
