@@ -7,6 +7,13 @@
   become: yes
   when: concourse_baggageclaim_driver == 'btrfs'
 
+- name: Check btrfs-progs is present
+  package:
+     name: btrfs-progs
+     state: present
+  become: yes
+  when: concourse_baggageclaim_driver == 'btrfs'
+
 - name: probe overlay module
   modprobe:
     name: overlay
