@@ -101,6 +101,9 @@ exec {{ concourse_binary_path }} web \
 {% if concourse_resource_checking_interval is defined %}
   --resource-checking-interval "{{ concourse_resource_checking_interval }}" \
 {% endif %}
+{% if concourse_base_resource_type_defaults is defined %}
+  --base-resource-type-defaults "{{ concourse_base_resource_type_defaults_file }}" \
+{% endif %}
 {% if concourse_web_options is defined %}
   {{ concourse_web_options }}
 {% endif %}
