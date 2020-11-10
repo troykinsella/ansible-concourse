@@ -22,6 +22,10 @@
       password: "admin"
     concourse_main_team_local_users:
     - admin
+    concourse_base_resource_type_defaults:
+      registry-image:
+        registry_mirror:
+          host: cache.example.com
   - role: /role
     tags:
     - worker
