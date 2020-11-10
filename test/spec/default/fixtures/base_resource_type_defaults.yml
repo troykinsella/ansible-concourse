@@ -1,0 +1,3 @@
+registry-image:
+    registry_mirror:
+        host: cache.example.com

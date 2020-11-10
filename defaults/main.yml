@@ -62,6 +62,7 @@ concourse_session_signing_key_path: "{{ concourse_etc_dir }}/session_signing_key
 #concourse_authorized_worker_keys: []
 #concourse_auth_duration:
 #concourse_resource_checking_interval:
+concourse_base_resource_type_defaults_file: "{{ concourse_etc_dir }}/base_resource_type_defaults.yml"
 #concourse_web_options:
 concourse_web_env: {}
 

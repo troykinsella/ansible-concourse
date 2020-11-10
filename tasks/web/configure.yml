@@ -55,3 +55,15 @@
   when: concourse_tls_key is defined
   notify:
   - restart concourse web
+
+- name: copy resource type defaults
+  copy:
+    content: "{{ concourse_base_resource_type_defaults | to_nice_yaml }}"
+    dest: "{{ concourse_base_resource_type_defaults_file }}"
+    owner: "{{ concourse_user }}"
+    group: "{{ concourse_group }}"
+    mode: "{{ concourse_etc_files_mode }}"
+  become: yes
+  when: concourse_base_resource_type_defaults is defined
+  notify:
+  - restart concourse web
