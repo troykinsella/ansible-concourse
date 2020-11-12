@@ -61,6 +61,17 @@ describe file('/opt/concourse/etc/session_signing_key') do
   its(:content) { should eq fixture }
 end
 
+describe file('/opt/concourse/etc/brt_defaults.yml') do
+  it { should exist }
+  it { should be_file }
+  it { should be_owned_by 'concourse' }
+  it { should be_grouped_into 'concourse'}
+  it { should be_mode 400 }
+
+  fixture = File.read(File.join(Dir.pwd, "spec/default/fixtures/brt_default.yml")).strip + "\n"
+  its(:content) { should eq fixture }
+end
+
 # Worker
 
 describe file('/opt/concourse/work') do

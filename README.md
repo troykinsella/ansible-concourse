@@ -115,6 +115,8 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_authorized_worker_keys`: Required. Concatenated authorized worker keys.
 * `concourse_auth_duration`: Optional. The length of time for which tokens are valid.
 * `concourse_resource_checking_interval`: Optional. Interval on which to check for new versions of resources. 
+* `concourse_base_resource_type_defaults`: Optional. A hash of cluster-wide defaults for resource types.
+* `concourse_base_resource_type_defaults_file`: Optional. The path to the resource type defaults file.
 * `concourse_web_options`: Optional. Other non-managed options to pass to `concourse`.
 * `concourse_web_env`: Optional. A hash of environment variables made available to the `concourse web` process.
 
