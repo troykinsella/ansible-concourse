@@ -29,7 +29,8 @@ ansible-galaxy install troykinsella.concourse
 
 ## Branches
 
-* `master`: Concourse 6.x (6.2.0)
+* `master`: Concourse 7.x (7.1.0)
+* `support/6.x`: Concourse 6.x
 * `support/5.x`: Concourse 5.x
 * `support/4.x`: Concourse 4.x
 * `support/3.x`: Concourse 3.x
