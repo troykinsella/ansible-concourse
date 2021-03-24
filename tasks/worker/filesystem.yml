@@ -26,6 +26,8 @@
     path: "{{ concourse_work_volume_mount_path }}"
     state: unmounted
   become: yes
+  ignore_errors: true
+  register: unmount_work_volume
 
 - name: create work volume filesystem
   filesystem:
@@ -34,6 +36,7 @@
     force: "{{ concourse_work_volume_fs_force_create }}"
     resizefs: "{{ concourse_work_volume_fs_resize }}"
   become: yes
+  when: unmount_work_volume is succeeded
 
 - name: mount work volume
   mount:
@@ -43,3 +46,4 @@
     opts: "{{ concourse_work_volume_mount_opts }}"
     state: mounted
   become: yes
+  when: unmount_work_volume is succeeded
