@@ -13,6 +13,8 @@
     concourse_authorized_worker_keys:
     - "{{ lookup('file', 'spec/default/fixtures/worker_key.pub') }}"
     concourse_external_url: "http://localhost:8080/"
+    concourse_vault_url: "http://localhost:8200"
+    concourse_vault_client_token: "vault-client-token"
     concourse_postgres_database: atc
     concourse_postgres_user: concourse
     concourse_postgres_password: concourse
