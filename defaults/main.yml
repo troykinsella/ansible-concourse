@@ -14,7 +14,7 @@ concourse_gid: "{{ concourse_uid }}"
 
 # Installation variables
 
-concourse_version: 7.1.0
+concourse_version: 7.2.0
 concourse_install_prefix_dir: /opt
 concourse_install_dir: "{{ concourse_install_prefix_dir }}/concourse"
 concourse_bin_dir: "{{ concourse_install_dir }}/bin"
@@ -22,7 +22,7 @@ concourse_binary_path: "{{ concourse_bin_dir }}/concourse"
 concourse_etc_dir: "{{ concourse_install_dir }}/etc"
 concourse_archive_name: "concourse-{{ concourse_version }}-{{ concourse_archive_os }}-{{ concourse_archive_arch }}.tgz"
 concourse_archive_url: "https://github.com/concourse/concourse/releases/download/v{{ concourse_version }}/{{ concourse_archive_name }}"
-concourse_archive_checksum: "sha1:cd63e3660aaa7705f83bb432088affa23eb0d3b6"
+concourse_archive_checksum: "sha1:54a1650e98cc6b1ed78790a00affbe7ccf445b6c"
 concourse_archive_os: linux
 concourse_archive_arch: amd64
 concourse_archive_fetch_timeout: 30
