@@ -32,6 +32,12 @@ exec {{ concourse_binary_path }} web \
 {% if concourse_external_url %}
   --external-url "{{ concourse_external_url }}" \
 {% endif %}
+{% if concourse_vault_url %}
+  --vault-url "{{ concourse_vault_url }}" \
+{% endif %}
+{% if concourse_vault_client_token %}
+  --vault-client-token "{{ concourse_vault_client_token }}" \
+{% endif %}
 {% if concourse_encryption_key is defined %}
   --encryption-key "{{ concourse_encryption_key }}" \
 {% endif %}

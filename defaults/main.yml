@@ -56,6 +56,8 @@ concourse_authorized_worker_keys_path: "{{ concourse_etc_dir }}/authorized_worke
 concourse_host_key_path: "{{ concourse_etc_dir }}/host_key"
 #concourse_session_signing_key:
 concourse_session_signing_key_path: "{{ concourse_etc_dir }}/session_signing_key"
+#concourse_vault_url:
+#concourse_vault_client_token:
 #concourse_encryption_key:
 #concourse_old_encryption_key:
 #concourse_host_key:
