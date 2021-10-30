@@ -1,4 +1,9 @@
 ---
+- name: worker/filesystem - print extra info
+  ansible.builtin.debug:
+    msg:
+      - "concourse_baggageclaim_driver: {{ concourse_baggageclaim_driver }}"
+
 - name: probe btrfs module
   modprobe:
     name: btrfs

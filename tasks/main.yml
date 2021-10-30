@@ -1,4 +1,8 @@
 ---
+- name: main - print extra info
+  ansible.builtin.debug:
+    msg:
+      - "concourse_baggageclaim_driver: {{ concourse_baggageclaim_driver }}"
 
 - include: user.yml
   when: concourse_manage_user
