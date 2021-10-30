@@ -9,7 +9,6 @@
   become: yes
 
 - include: filesystem.yml
-  when: concourse_manage_work_volume
 
 - name: create worker launch script
   template:
@@ -21,7 +20,7 @@
     force: yes
   become: yes
   notify:
-  - restart concourse worker
+    - restart concourse worker
 
 - name: create worker land script
   template:
@@ -52,7 +51,7 @@
   become: yes
   register: concourse_worker_service
   notify:
-  - restart concourse worker
-  - systemd daemon reload
+    - restart concourse worker
+    - systemd daemon reload
   tags:
-  - no-test
+    - no-test

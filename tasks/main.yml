@@ -1,8 +1,4 @@
 ---
-- name: main - print extra info
-  ansible.builtin.debug:
-    msg:
-      - "concourse_baggageclaim_driver: {{ concourse_baggageclaim_driver }}"
 
 - include: user.yml
   when: concourse_manage_user
@@ -14,5 +10,5 @@
 - shell: /bin/true
   when: concourse_force_restart
   notify:
-  - restart concourse web
-  - restart concourse worker
+    - restart concourse web
+    - restart concourse worker
