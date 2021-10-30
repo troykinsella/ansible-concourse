@@ -1,5 +1,5 @@
 ---
-- name: copy tsa public key
+- name: configure/worker - copy tsa public key
   copy:
     content: "{{ concourse_tsa_public_key }}"
     dest: "{{ concourse_tsa_public_key_path }}"
@@ -8,9 +8,10 @@
     mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
-  - restart concourse worker
+    - restart concourse worker
+  when: concourse_tsa_public_key is defined and concourse_tsa_public_key|length
 
-- name: copy worker key
+- name: configure/worker - copy worker key
   copy:
     content: "{{ concourse_tsa_worker_key }}"
     dest: "{{ concourse_tsa_worker_key_path }}"
@@ -19,4 +20,5 @@
     mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
-  - restart concourse worker
+    - restart concourse worker
+  when: concourse_tsa_worker_key is defined and concourse_tsa_worker_key|length
