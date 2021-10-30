@@ -1,25 +1,24 @@
 ---
-
 - name: probe btrfs module
   modprobe:
     name: btrfs
     state: present
   become: yes
-  when: concourse_baggageclaim_driver == 'btrfs'
+  when: concourse_baggageclaim_driver == "btrfs"
 
 - name: install btrfs-progs package
   package:
-     name: btrfs-progs
-     state: present
+    name: btrfs-progs
+    state: present
   become: yes
-  when: concourse_baggageclaim_driver == 'btrfs'
+  when: concourse_baggageclaim_driver == "btrfs"
 
 - name: probe overlay module
   modprobe:
     name: overlay
     state: present
   become: yes
-  when: concourse_baggageclaim_driver == 'overlay'
+  when: concourse_baggageclaim_driver == "overlay"
 
 - name: unmount work volume
   mount:
