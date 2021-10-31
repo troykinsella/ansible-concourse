@@ -92,6 +92,14 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_web`: Optional. Set to "yes" to install the Concourse ATC.
 * `concourse_bind_ip`: Optional. The IP address on which to listen to web traffic.
 * `concourse_bind_port`: Optional. The port on which to listen for HTTP traffic.
+* `concourse_host_key`: Optional. The host key.
+* `concourse_authorized_worker_keys`: Optional. Concatenated authorized worker keys.
+* `concourse_session_signing_key`: Optional. The session signing key.
+
+  **Note**: if the keys are not provided, then it is expected that the corresponding paths (i.e. `concourse_(host|session_signing|authorized_worker)_key_path`) are given for Concourse configuration, and the files with proper values are provisioned during the bootstrap.
+* `concourse_authorized_worker_keys_path`: Optional. The path to the authorized worker keys file.
+* `concourse_host_key_path`: Optional. The path to the host key file.
+* `concourse_session_signing_key_path`: Optional. The path to the session signing key file.
 * `concourse_tls_bind_port`: Optional. The port on which to listen for HTTPS traffic.
 * `concourse_tls_certificate`: Optional. The content of the TLS certificate to use for HTTPS termination.
 * `concourse_tls_certificate_path`: Optional. The remote file path of the TLS certificate to use for HTTPS termination.
@@ -104,16 +112,10 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_web_launcher_path`: Optional. The path to the script that launches the Concourse web process.
 * `concourse_web_launcher_mode`: Optional. The file mode of the web launcher script.
 * `concourse_cli_artifacts_dir`: Optional. The value of the `--cli-artifacts-dir` option.
-* `concourse_authorized_worker_keys_path`: Optional. The path to the authorized worker keys file.
-* `concourse_host_key_path`: Optional. The path to the host key file.
-* `concourse_session_signing_key`: Required. The session signing key.
-* `concourse_session_signing_key_path`: Optional. The path to the session signing key file.
 * `concourse_encryption_key`: Optional. A 16 or 32 length key used to encrypt sensitive data before storing
   it in the database
 * `concourse_old_encryption_key`: Optional. An encryption key previously used. If provided without a new key,
   data is encrypted. If provided with a new key, data is re-encrypted.
-* `concourse_host_key`: Required. The host key.
-* `concourse_authorized_worker_keys`: Required. Concatenated authorized worker keys.
 * `concourse_auth_duration`: Optional. The length of time for which tokens are valid.
 * `concourse_resource_checking_interval`: Optional. Interval on which to check for new versions of resources.
 * `concourse_base_resource_type_defaults`: Optional. A hash of cluster-wide defaults for resource types.
