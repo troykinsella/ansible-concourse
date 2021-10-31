@@ -47,6 +47,8 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 Note: The vast majority of variables have sensible defaults and normally need not be defined,
 but exist for when control over related behaviour is needed. See examples for a minimal configuration set.
 
+**IMPORTANT**: do NOT use Ansible variables with sensitive keys, passwords and secrets in production, i.e. `concourse_encryption_key`, `concourse_github_client_secret`, `concourse_postgres_password`. As they will be leaked and exposed both in the logs and in the process' command string. Instead set the corresponding environment variables in `concourse_web_env`, i.e. `CONCOURSE_ENCRYPTION_KEY`, `CONCOURSE_GITHUB_CLIENT_SECRET`, `CONCOURSE_POSTGRES_PASSWORD`, etc.
+
 ### Maintenance Variables
 
 * `concourse_force_restart`: Optional. Default: "no". Triggers a restart of the web and/or worker services regardless as to whether or not configuration has changed.
