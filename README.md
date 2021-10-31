@@ -47,6 +47,8 @@ to the concourse binary at launch time. Run `concourse web -h` or `concourse wor
 Note: The vast majority of variables have sensible defaults and normally need not be defined,
 but exist for when control over related behaviour is needed. See examples for a minimal configuration set.
 
+**IMPORTANT**: do NOT use Ansible variables with sensitive keys, passwords and secrets in production, i.e. `concourse_encryption_key`, `concourse_github_client_secret`, `concourse_postgres_password`. As they will be leaked and exposed both in the logs and in the process' command string. Instead set the corresponding environment variables in `concourse_web_env`, i.e. `CONCOURSE_ENCRYPTION_KEY`, `CONCOURSE_GITHUB_CLIENT_SECRET`, `CONCOURSE_POSTGRES_PASSWORD`, etc.
+
 ### Maintenance Variables
 
 * `concourse_force_restart`: Optional. Default: "no". Triggers a restart of the web and/or worker services regardless as to whether or not configuration has changed.
@@ -82,7 +84,7 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_service_enabled`: Optional. Default: "yes". Manage a `systemd` service for a Concourse `web` and/or `worker` instance.
 * `concourse_service_start`: Optional. Default: "yes". Start the `systemd` service(s) for Concourse `web` and/or `worker`.
 * `concourse_log_level`: Optional. The minimum level of logs to see. [debug|info|error|fatal]
-* `concourse_env_file`: Optional. A file containing environment variables which is fed into the `EnvironmentFile` attribute of the 
+* `concourse_env_file`: Optional. A file containing environment variables which is fed into the `EnvironmentFile` attribute of the
   `systemd` service unit file. This is useful for configuration managed outside of the playbook. If
   the configuration should be managed by the playbook, `concourse_web_env` and/or `concourse_worker_env` is
   the better choice.
@@ -92,30 +94,32 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_web`: Optional. Set to "yes" to install the Concourse ATC.
 * `concourse_bind_ip`: Optional. The IP address on which to listen to web traffic.
 * `concourse_bind_port`: Optional. The port on which to listen for HTTP traffic.
+* `concourse_host_key`: Optional. The host key.
+* `concourse_authorized_worker_keys`: Optional. Concatenated authorized worker keys.
+* `concourse_session_signing_key`: Optional. The session signing key.
+
+  **Note**: if the keys are not provided, then it is expected that the corresponding paths (i.e. `concourse_(host|session_signing|authorized_worker)_key_path`) are given for Concourse configuration, and the files with proper values are provisioned during the bootstrap.
+* `concourse_authorized_worker_keys_path`: Optional. The path to the authorized worker keys file.
+* `concourse_host_key_path`: Optional. The path to the host key file.
+* `concourse_session_signing_key_path`: Optional. The path to the session signing key file.
 * `concourse_tls_bind_port`: Optional. The port on which to listen for HTTPS traffic.
 * `concourse_tls_certificate`: Optional. The content of the TLS certificate to use for HTTPS termination.
 * `concourse_tls_certificate_path`: Optional. The remote file path of the TLS certificate to use for HTTPS termination.
-  Normally, only `concourse_tls_certificate` needs to be defined.  
+  Normally, only `concourse_tls_certificate` needs to be defined.
 * `concourse_tls_key`: Optional. Optional. The content of the TLS key to use for HTTPS termination.
 * `concourse_tls_key_path`: Optional. The remote file path of the TLS key to use for HTTPS termination.
-  Normally, only `concourse_tls_key` needs to be defined. 
+  Normally, only `concourse_tls_key` needs to be defined.
 * `concourse_peer_address`: Optional. The URL at which this ATC can be reached from other ATCs in the cluster.
 * `concourse_external_url`: Optional. The URL at which any ATC can be reached from the outside.
 * `concourse_web_launcher_path`: Optional. The path to the script that launches the Concourse web process.
 * `concourse_web_launcher_mode`: Optional. The file mode of the web launcher script.
 * `concourse_cli_artifacts_dir`: Optional. The value of the `--cli-artifacts-dir` option.
-* `concourse_authorized_worker_keys_path`: Optional. The path to the authorized worker keys file.
-* `concourse_host_key_path`: Optional. The path to the host key file.
-* `concourse_session_signing_key`: Required. The session signing key.
-* `concourse_session_signing_key_path`: Optional. The path to the session signing key file.
 * `concourse_encryption_key`: Optional. A 16 or 32 length key used to encrypt sensitive data before storing
-  it in the database 
-* `concourse_old_encryption_key`: Optional. An encryption key previously used. If provided without a new key, 
+  it in the database
+* `concourse_old_encryption_key`: Optional. An encryption key previously used. If provided without a new key,
   data is encrypted. If provided with a new key, data is re-encrypted.
-* `concourse_host_key`: Required. The host key.
-* `concourse_authorized_worker_keys`: Required. Concatenated authorized worker keys.
 * `concourse_auth_duration`: Optional. The length of time for which tokens are valid.
-* `concourse_resource_checking_interval`: Optional. Interval on which to check for new versions of resources. 
+* `concourse_resource_checking_interval`: Optional. Interval on which to check for new versions of resources.
 * `concourse_base_resource_type_defaults`: Optional. A hash of cluster-wide defaults for resource types.
 * `concourse_base_resource_type_defaults_file`: Optional. The path to the resource type defaults file.
 * `concourse_web_options`: Optional. Other non-managed options to pass to `concourse`.
@@ -126,7 +130,7 @@ but exist for when control over related behaviour is needed. See examples for a 
 * `concourse_postgres_host`: Optional. The Postgres host to connect to.
 * `concourse_postgres_port`: Optional. The Postgres port to connect to.
 * `concourse_postgres_socket`: Optional. The path to a Unix domain socket to connect to.
-* `concourse_postgres_user`: Optional. The Postgres user to sign in as. 
+* `concourse_postgres_user`: Optional. The Postgres user to sign in as.
 * `concourse_postgres_password`: Optional. The Postgres user's password.
 * `concourse_postgres_ssl_mode`: Optional. Whether or not to use SSL with the Postgres connection.
 * `concourse_postgres_ca_cert`: Optional. The Postgres CA cert file location.
@@ -137,7 +141,7 @@ but exist for when control over related behaviour is needed. See examples for a 
 
 #### Web Local Authentication Variables
 
-* `concourse_local_users`: Optional. A list of concourse user credentials that are added as local users. 
+* `concourse_local_users`: Optional. A list of concourse user credentials that are added as local users.
   Entries are objects having `name` and `password` fields (see example). Passwords can be plain text or bcrypted.
 * `concourse_main_team_local_users`: Optional. List of whitelisted local concourse users (of the supplied local user list).
 
@@ -166,8 +170,10 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 * `concourse_tsa_public_key_path`: Optional. The path to the tsa public key file.
 * `concourse_tsa_worker_key_path`: Optional. The path to the worker private key file.
 * `concourse_tsa_host`: Required. The value of the `--tsa-host` option.
-* `concourse_tsa_public_key`: Required. The tsa public key.
-* `concourse_tsa_worker_key`: Required. The tsa worker private key.
+* `concourse_tsa_public_key`: Optional. The tsa public key.
+* `concourse_tsa_worker_key`: Optional. The tsa worker private key.
+
+  **Note**: if a key is not provided, then it is expected that the corresponding path (i.e. `concourse_tsa_(public|worker)_key_path`) is given for Concourse configuration, and the file with a proper value is provisioned during the bootstrap.
 * `concourse_worker_tag`: Optional. The value of the `--tag` option.
 * `concourse_baggageclaim_driver`: Optional. The driver to use for managing volumes.
 * `concourse_worker_options`: Optional. Other non-managed options to pass to `concourse`.
@@ -183,6 +189,7 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
 
 ## Example Playbook
 
+```yaml
     - hosts: atc
       roles:
       - role: troykinsella.concourse
@@ -211,6 +218,7 @@ Unsupported. Do it yer dang self by supplying `concourse web` command options wi
           CONCOURSE_GARDEN_NETWORK_POOL: 10.254.0.0/16
           CONCOURSE_GARDEN_MAX_CONTAINERS: 512
           CONCOURSE_GARDEN_DOCKER_REGISTRY: https://docker.my-private-registry.org
+```
 
 ## Testing
 

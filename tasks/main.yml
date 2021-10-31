@@ -10,5 +10,5 @@
 - shell: /bin/true
   when: concourse_force_restart
   notify:
-  - restart concourse web
-  - restart concourse worker
+    - restart concourse web
+    - restart concourse worker

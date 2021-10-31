@@ -1,5 +1,5 @@
 ---
-- name: copy host key
+- name: configure/web - copy host key
   copy:
     content: "{{ concourse_host_key }}"
     dest: "{{ concourse_host_key_path }}"
@@ -8,9 +8,10 @@
     mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
-  - restart concourse web
+    - restart concourse web
+  when: concourse_host_key is defined and concourse_host_key|length
 
-- name: copy session signing key
+- name: configure/web - copy session signing key
   copy:
     content: "{{ concourse_session_signing_key }}"
     dest: "{{ concourse_session_signing_key_path }}"
@@ -19,9 +20,10 @@
     mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
-  - restart concourse web
+    - restart concourse web
+  when: concourse_session_signing_key is defined and concourse_session_signing_key|length
 
-- name: copy authorized worker keys
+- name: configure/web - copy authorized worker keys
   template:
     src: authorized_worker_keys.j2
     dest: "{{ concourse_authorized_worker_keys_path }}"
@@ -30,9 +32,10 @@
     mode: "{{ concourse_etc_files_mode }}"
   become: yes
   notify:
-  - restart concourse web
+    - restart concourse web
+  when: concourse_authorized_worker_keys is defined and concourse_authorized_worker_keys|length
 
-- name: tls certificate | concourse
+- name: configure/web - tls certificate | concourse
   copy:
     content: "{{ concourse_tls_certificate }}"
     dest: "{{ concourse_tls_certificate_path }}"
@@ -42,9 +45,9 @@
   become: yes
   when: concourse_tls_certificate is defined
   notify:
-  - restart concourse web
+    - restart concourse web
 
-- name: tls key | concourse
+- name: configure/web - tls key | concourse
   copy:
     content: "{{ concourse_tls_key }}"
     dest: "{{ concourse_tls_key_path }}"
@@ -54,9 +57,9 @@
   become: yes
   when: concourse_tls_key is defined
   notify:
-  - restart concourse web
+    - restart concourse web
 
-- name: copy resource type defaults
+- name: configure/web - copy resource type defaults
   copy:
     content: "{{ concourse_base_resource_type_defaults | to_nice_yaml }}"
     dest: "{{ concourse_base_resource_type_defaults_file }}"
@@ -66,4 +69,4 @@
   become: yes
   when: concourse_base_resource_type_defaults is defined
   notify:
-  - restart concourse web
+    - restart concourse web
