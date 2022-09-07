@@ -47,7 +47,7 @@ concourse_web: no
 concourse_tls_certificate_path: "{{ concourse_etc_dir }}/tls_cert"
 #concourse_tls_key:
 concourse_tls_key_path: "{{ concourse_etc_dir }}/tls_key"
-#concourse_peer_url:
+#concourse_peer_address: "{{ ansible_default_ipv4.address }}"
 #concourse_external_url:
 concourse_web_launcher_path: "{{ concourse_bin_dir }}/concourse-web"
 concourse_web_launcher_mode: "0700"
