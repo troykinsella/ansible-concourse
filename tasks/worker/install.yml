@@ -8,7 +8,7 @@
     group: "{{ concourse_group }}"
   become: yes
 
-- include: filesystem.yml
+- import_tasks: filesystem.yml
   when: concourse_manage_work_volume
 
 - name: create worker launch script

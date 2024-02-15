@@ -1,6 +1,6 @@
 ---
-- include: web/configure.yml
+- import_tasks: web/configure.yml
   when: concourse_web
 
-- include: worker/configure.yml
+- import_tasks: worker/configure.yml
   when: concourse_worker
