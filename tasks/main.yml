@@ -1,11 +1,11 @@
 ---
 
-- include: user.yml
+- import_tasks: user.yml
   when: concourse_manage_user
 
-- include: install.yml
-- include: configure.yml
-- include: start.yml
+- import_tasks: install.yml
+- import_tasks: configure.yml
+- import_tasks: start.yml
 
 - shell: /bin/true
   when: concourse_force_restart

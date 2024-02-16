@@ -31,7 +31,7 @@
   tags:
   - no-test
 
-- include: stop.yml
+- import_tasks: stop.yml
   when: needs_install
 
 - name: unpack archive
@@ -73,9 +73,9 @@
   become: yes
 
 - name: install web
-  include: web/install.yml
+  import_tasks: web/install.yml
   when: concourse_web
 
 - name: install worker
-  include: worker/install.yml
+  import_tasks: worker/install.yml
   when: concourse_worker
